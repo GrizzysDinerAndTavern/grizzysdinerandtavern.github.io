@@ -201,6 +201,7 @@
     .mobile-menu.is-open a:nth-child(3) { transition-delay: 170ms; }
     .mobile-menu.is-open a:nth-child(4) { transition-delay: 220ms; }
     .mobile-menu.is-open a:nth-child(5) { transition-delay: 270ms; }
+    .mobile-menu.is-open a:nth-child(6) { transition-delay: 320ms; }
 
     /* ============ Buttons ============ */
     .btn {
@@ -491,6 +492,55 @@
     .hours-note { margin-top: 14px !important; font-size: 0.82rem; line-height: 1.5; color: var(--gray-600); }
     @media (min-width: 560px) { .hours-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
+    /* ============ Google Reviews ============ */
+    .reviews { background: var(--white); }
+    .reviews-head { display: grid; gap: 26px; align-items: center; margin-bottom: 38px; }
+    @media (min-width: 820px) { .reviews-head { grid-template-columns: minmax(0, 1fr) auto; } }
+    .rating-summary {
+      display: inline-flex; align-items: center; gap: 18px; padding: 18px 24px;
+      background: var(--cream); border: 3px solid var(--navy-950); border-radius: 24px;
+      box-shadow: var(--shadow-sm); transform: rotate(-1deg);
+    }
+    .rating-summary__score { font-family: var(--display); font-size: 3.4rem; line-height: 1; color: var(--navy-950); }
+    .rating-summary__meta { display: grid; gap: 4px; }
+    .rating-summary__meta span { color: var(--gray-600); font-size: 0.8rem; font-weight: 700; }
+    .g-logo { width: 22px; height: 22px; flex: 0 0 auto; }
+    .g-line { display: inline-flex; align-items: center; gap: 7px; font-size: 0.82rem; font-weight: 800; color: var(--gray-700); }
+    .stars { display: inline-flex; gap: 2px; }
+    .stars svg { width: 18px; height: 18px; fill: #fbbc04; }
+    .stars svg.off { fill: #dadce0; }
+    .stars--lg svg { width: 22px; height: 22px; }
+    .review-grid { display: grid; gap: 18px; }
+    @media (min-width: 600px) { .review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 980px) { .review-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .review-card {
+      display: flex; flex-direction: column; gap: 12px; padding: 22px;
+      background: var(--white); border: 1px solid #e0e3e7; border-radius: 22px;
+      box-shadow: 0 6px 20px rgba(4,16,31,0.07);
+      transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms;
+    }
+    .review-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(4,16,31,0.14); }
+    .review-card__top { display: flex; align-items: center; gap: 12px; }
+    .review-avatar {
+      width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center;
+      color: var(--white); border-radius: 50%; font-size: 1.05rem; font-weight: 800;
+    }
+    .review-card:nth-child(6n+1) .review-avatar { background: #1a73e8; }
+    .review-card:nth-child(6n+2) .review-avatar { background: var(--red-600); }
+    .review-card:nth-child(6n+3) .review-avatar { background: #188038; }
+    .review-card:nth-child(6n+4) .review-avatar { background: #f29900; }
+    .review-card:nth-child(6n+5) .review-avatar { background: var(--navy-700); }
+    .review-card:nth-child(6n+6) .review-avatar { background: #9334e6; }
+    .review-card__who { min-width: 0; display: grid; line-height: 1.25; }
+    .review-card__who strong { font-size: 0.94rem; color: #202124; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .review-card__who span { color: #5f6368; font-size: 0.76rem; }
+    .review-card__glogo { margin-left: auto; }
+    .review-card__rating { display: flex; align-items: center; gap: 8px; }
+    .review-card__rating time { color: #5f6368; font-size: 0.78rem; }
+    .review-card__text { margin: 0; color: #3c4043; font-size: 0.9rem; line-height: 1.55; }
+    .reviews-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
+    .reviews-note { margin-top: 18px; color: var(--gray-600); font-size: 0.78rem; }
+
     /* ============ Final CTA ============ */
     .final-cta { position: relative; overflow: hidden; text-align: center; }
     .final-cta__inner { position: relative; z-index: 1; max-width: 900px; margin-inline: auto; }
@@ -659,6 +709,7 @@
         <a href="#menu-categories">Food</a>
         <a href="#menus">Menus</a>
         <a href="#visit">Location</a>
+        <a href="#reviews">Reviews</a>
         <a href="tel:9203617693">Call</a>
       </nav>
 
@@ -678,6 +729,7 @@
         <a href="#menu-categories">Our Food</a>
         <a href="#menus">View Menus</a>
         <a href="#visit">Visit Grizzy’s</a>
+        <a href="#reviews">Reviews</a>
         <a href="tel:9203617693">Call (920) 361-7693</a>
       </div>
     </nav>
@@ -691,7 +743,7 @@
         <div class="float f-pizza float--2" data-parallax data-speed="-0.10"><img src="https://pngimg.com/uploads/pizza/pizza_PNG44088.png" alt="" loading="eager" data-cutout></div>
         <div class="float f-beer float--3" data-parallax data-speed="0.20"><img src="https://pngimg.com/uploads/beer/beer_PNG2340.png" alt="" loading="lazy" data-cutout></div>
         <div class="float f-pancake float--4" data-parallax data-speed="-0.16"><img src="https://pngimg.com/uploads/pancake/pancake_PNG73.png" alt="" loading="lazy" data-cutout></div>
-        <div class="float f-chicken float--5" data-parallax data-speed="0.24"><img src="https://pngimg.com/uploads/kfc/kfc_PNG29.png" alt="" loading="lazy" data-cutout></div>
+        <div class="float f-chicken float--5" data-parallax data-speed="0.24"><img src="https://pngimg.com/uploads/barbecue/barbecue_PNG54.png" alt="" loading="lazy" data-cutout></div>
       </div>
 
       <div class="container hero__inner">
@@ -780,7 +832,7 @@
             <span class="about-stat__bucket" aria-hidden="true">
               <img src="https://pngimg.com/uploads/beer/beer_PNG2340.png" alt="" loading="lazy" data-cutout>
               <img src="https://pngimg.com/uploads/beer/beer_PNG2352.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/kfc/kfc_PNG29.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/barbecue/barbecue_PNG54.png" alt="" loading="lazy" data-cutout>
             </span>
             <strong>Cold Drinks</strong><span>Pull up a chair and stay awhile.</span>
           </article>
@@ -851,7 +903,7 @@
           </article>
 
           <article class="cat-card reveal" data-reveal-delay="2" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/kfc/kfc_PNG29.png" alt="" data-cutout>
+            <img class="cat-card__img" src="https://pngimg.com/uploads/barbecue/barbecue_PNG54.png" alt="" data-cutout>
             <div class="cat-card__num">03</div>
             <h3>Wings</h3>
             <p>Crispy wings tossed in your favorite sauce — perfect for the game.</p>
@@ -1025,6 +1077,135 @@
             </div>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ============ GOOGLE REVIEWS ============
+         TEMPORARY: sample reviews & ratings for layout preview only.
+         Replace with the real Google reviews widget/API feed before launch. -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="reviews-head">
+          <div class="section-heading reveal" style="margin-bottom:0">
+            <span class="eyebrow">Word around town</span>
+            <h2>What Folks Are <span class="hl">Saying</span></h2>
+            <p>Straight from our Google reviews — good food and good times, verified by good people.</p>
+          </div>
+          <div class="rating-summary reveal" data-reveal-delay="1">
+            <span class="rating-summary__score">4.7</span>
+            <span class="rating-summary__meta">
+              <span class="stars stars--lg" aria-label="Rated 4.7 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <span class="g-line">
+                <svg class="g-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+                Based on 128 Google reviews
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="review-grid">
+          <article class="review-card reveal">
+            <div class="review-card__top">
+              <span class="review-avatar" aria-hidden="true">D</span>
+              <span class="review-card__who"><strong>Dale Hoffman</strong><span>Local Guide · 47 reviews</span></span>
+              <svg class="g-logo review-card__glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <div class="review-card__rating">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <time>2 weeks ago</time>
+            </div>
+            <p class="review-card__text">Best burger in Berlin, hands down. Got the mushroom swiss with a basket of fries and it hit the spot. Bartender was friendly and the beer was ice cold. Will be back!</p>
+          </article>
+
+          <article class="review-card reveal" data-reveal-delay="1">
+            <div class="review-card__top">
+              <span class="review-avatar" aria-hidden="true">S</span>
+              <span class="review-card__who"><strong>Sarah Kowalski</strong><span>12 reviews</span></span>
+              <svg class="g-logo review-card__glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <div class="review-card__rating">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <time>a month ago</time>
+            </div>
+            <p class="review-card__text">Stopped in for breakfast on a Saturday — pancakes were huge and fluffy, coffee kept coming. You can tell it's a real local spot. Everyone was so welcoming!</p>
+          </article>
+
+          <article class="review-card reveal" data-reveal-delay="2">
+            <div class="review-card__top">
+              <span class="review-avatar" aria-hidden="true">M</span>
+              <span class="review-card__who"><strong>Mike Vandenberg</strong><span>Local Guide · 89 reviews</span></span>
+              <svg class="g-logo review-card__glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <div class="review-card__rating">
+              <span class="stars" aria-label="4 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg class="off" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <time>a month ago</time>
+            </div>
+            <p class="review-card__text">Solid tavern pizza and a great wing night. Gets busy on weekends so grab a table early. Prices are fair and portions don't disappoint.</p>
+          </article>
+
+          <article class="review-card reveal" data-reveal-delay="3">
+            <div class="review-card__top">
+              <span class="review-avatar" aria-hidden="true">J</span>
+              <span class="review-card__who"><strong>Jenny Radtke</strong><span>23 reviews</span></span>
+              <svg class="g-logo review-card__glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <div class="review-card__rating">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <time>2 months ago</time>
+            </div>
+            <p class="review-card__text">Ordered carry out for the family — food was ready right on time and still hot when we got home. The kids devoured the pizza. So glad Berlin has this place!</p>
+          </article>
+
+          <article class="review-card reveal" data-reveal-delay="4">
+            <div class="review-card__top">
+              <span class="review-avatar" aria-hidden="true">T</span>
+              <span class="review-card__who"><strong>Tom Schneider</strong><span>Local Guide · 156 reviews</span></span>
+              <svg class="g-logo review-card__glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <div class="review-card__rating">
+              <span class="stars" aria-label="5 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <time>3 months ago</time>
+            </div>
+            <p class="review-card__text">Classic Wisconsin diner and tavern done right. Friday fish fry is the real deal and the old fashioneds are poured properly. This is what a hometown bar should feel like.</p>
+          </article>
+
+          <article class="review-card reveal" data-reveal-delay="5">
+            <div class="review-card__top">
+              <span class="review-avatar" aria-hidden="true">A</span>
+              <span class="review-card__who"><strong>Amanda Bauer</strong><span>8 reviews</span></span>
+              <svg class="g-logo review-card__glogo" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1A6.6 6.6 0 0 1 5.49 12c0-.73.13-1.44.35-2.1V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A10.97 10.97 0 0 0 12 1 11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg>
+            </div>
+            <div class="review-card__rating">
+              <span class="stars" aria-label="4 out of 5 stars">
+                <svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg><svg class="off" viewBox="0 0 24 24"><path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              </span>
+              <time>3 months ago</time>
+            </div>
+            <p class="review-card__text">Great spot to watch the Packers game with wings and a cold one. Service stayed quick even with a full bar. Wish they had a few more TVs but we'll definitely be back.</p>
+          </article>
+        </div>
+
+        <div class="reviews-actions reveal">
+          <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Grizzy%27s%20Diner%20%26%20Tavern%20186%20Broadway%20St%20Berlin%20WI%2054923" target="_blank" rel="noopener">Read All Reviews on Google</a>
+          <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query=Grizzy%27s%20Diner%20%26%20Tavern%20186%20Broadway%20St%20Berlin%20WI%2054923" target="_blank" rel="noopener">Write a Review</a>
+        </div>
+        <p class="reviews-note">Sample reviews shown for layout preview — connect the live Google Business Profile feed before launch.</p>
       </div>
     </section>
 
