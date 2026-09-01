@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <link rel="icon" type="image/png" href="assets/grizzys-logo.png">
+
+  <title>Grizzy’s Diner &amp; Tavern | Berlin, WI Restaurant, Bar, Carry Out &amp; Delivery</title>
+  <meta name="description" content="Visit Grizzy’s Diner & Tavern in Berlin, WI for breakfast, burgers, wings, pizza, entrées, cold drinks, carry out, delivery, and good times. Call (920) 361-7693.">
+  <meta name="theme-color" content="#071b33">
+  <meta name="robots" content="index, follow">
+
+  <!--
+    ==============================================
+    REDESIGNED HOMEPAGE (modern / bold / dynamic)
+    ==============================================
+    Brand palette preserved: deep navy, bright red, crisp white.
+    All real content kept: address, phone, hours, real menu images + lightbox, SEO schema.
+
+    NOTE: The cutout food photos are TEMPORARY placeholders pulled from pngimg.com
+    (transparent background PNGs). Swap the CUTOUT_* URLs for real Grizzy's food photos
+    when available. They fail gracefully (hidden) if a URL ever goes offline.
+  -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --navy-950: #04101f;
+      --navy-900: #071b33;
+      --navy-800: #0d294a;
+      --navy-700: #173b63;
+      --red-700: #b51f2e;
+      --red-600: #d32638;
+      --red-500: #ef3347;
+      --silver-200: #dfe4ea;
+      --silver-100: #eff2f5;
+      --cream: #fbf5e9;
+      --gray-700: #3e4650;
+      --gray-600: #5c6570;
+      --white: #ffffff;
+      --ink: #121922;
+      --display: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --display-alt: "Archivo Black", Impact, sans-serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --shadow-sm: 0 12px 30px rgba(4, 16, 31, 0.12);
+      --shadow-md: 0 22px 60px rgba(4, 16, 31, 0.20);
+      --radius-lg: 32px;
+      --radius-xl: 46px;
+      --container: 1220px;
+      --header-height: 74px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-height) + 18px);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 70px;
+    }
+
+    body.modal-open { overflow: hidden; }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button, input, select, textarea { font: inherit; }
+
+    :focus-visible { outline: 3px solid #ffbf47; outline-offset: 3px; }
+
+    .skip-link {
+      position: fixed; top: 8px; left: 8px; z-index: 9999;
+      transform: translateY(-150%);
+      padding: 10px 14px; color: var(--navy-950); background: var(--white);
+      border-radius: 8px; font-weight: 800; text-decoration: none;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .container { width: min(calc(100% - 34px), var(--container)); margin-inline: auto; }
+
+    .display { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.01em; }
+
+    /* ============ Marquee ============ */
+    .marquee {
+      position: relative; overflow: hidden;
+      background: var(--red-600); color: var(--white);
+      border-top: 3px solid var(--navy-950); border-bottom: 3px solid var(--navy-950);
+    }
+    .marquee--navy { background: var(--navy-950); color: var(--white); border-color: var(--red-600); }
+    .marquee__track {
+      display: flex; width: max-content;
+      animation: marquee-scroll 26s linear infinite;
+    }
+    .marquee--reverse .marquee__track { animation-direction: reverse; }
+    .marquee__group { display: flex; flex: 0 0 auto; }
+    .marquee__item {
+      display: inline-flex; align-items: center; gap: 18px;
+      padding: 12px 26px;
+      font-family: var(--display); font-size: clamp(1.05rem, 3.4vw, 1.7rem);
+      text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap;
+    }
+    .marquee__item::after {
+      content: "★"; font-size: 0.7em; color: var(--white); opacity: 0.85;
+    }
+    .marquee--navy .marquee__item::after { color: var(--red-500); }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ============ Header ============ */
+    .site-header {
+      position: sticky; top: 0; z-index: 1000; min-height: var(--header-height);
+      background: rgba(4, 16, 31, 0.92);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 12px 30px rgba(4,16,31,0.16);
+      backdrop-filter: blur(14px);
+    }
+    .header-inner {
+      min-height: var(--header-height); display: flex; align-items: center;
+      justify-content: space-between; gap: 16px;
+    }
+    .brand { display: inline-flex; min-width: 0; align-items: center; gap: 11px; color: var(--white); text-decoration: none; }
+    .brand__mark {
+      width: 46px; height: 46px; position: relative; overflow: hidden; flex: 0 0 auto;
+      display: grid; place-items: center; background: var(--white);
+      border: 3px solid var(--red-600); border-radius: 50%;
+    }
+    .brand__mark img { width: 100%; height: 100%; object-fit: contain; padding: 3px; }
+    .brand__fallback { display: none; color: var(--navy-900); font-family: var(--display); font-size: 1.25rem; }
+    .brand__text { min-width: 0; display: grid; line-height: 1.02; }
+    .brand__text strong { overflow: hidden; font-family: var(--display); font-size: 1.16rem; letter-spacing: 0.03em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+    .brand__text span { color: rgba(255,255,255,0.62); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+
+    .desktop-nav { display: none; align-items: center; gap: 4px; }
+    .desktop-nav a:not(.btn) {
+      padding: 10px 13px; color: rgba(255,255,255,0.80); border-radius: 999px;
+      font-size: 0.9rem; font-weight: 800; text-decoration: none; transition: background-color 160ms, color 160ms;
+    }
+    .desktop-nav a:not(.btn):hover { color: var(--white); background: rgba(255,255,255,0.09); }
+
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+    .header-actions .btn { min-height: 44px; padding: 10px 15px; font-size: 0.84rem; }
+    .header-directions { display: none; }
+
+    .menu-toggle {
+      width: 44px; height: 44px; position: relative;
+      border: 1px solid rgba(255,255,255,0.18); color: var(--white);
+      background: rgba(255,255,255,0.06); border-radius: 12px; cursor: pointer;
+      transition: background-color 260ms ease, border-color 260ms ease, transform 260ms cubic-bezier(.2,.8,.2,1);
+    }
+    .menu-toggle:active { transform: scale(0.92); }
+    .menu-toggle span, .menu-toggle::before, .menu-toggle::after {
+      width: 19px; height: 2px; content: ""; display: block; background: currentColor;
+      border-radius: 999px;
+      position: absolute; left: 50%; top: 50%;
+      transition: transform 300ms cubic-bezier(.2,.8,.2,1), opacity 200ms ease;
+    }
+    .menu-toggle::before { transform: translate(-50%, calc(-50% - 6px)); }
+    .menu-toggle span { transform: translate(-50%, -50%); }
+    .menu-toggle::after { transform: translate(-50%, calc(-50% + 6px)); }
+    .menu-toggle[aria-expanded="true"] { background: var(--red-600); border-color: var(--red-600); }
+    .menu-toggle[aria-expanded="true"] span { opacity: 0; transform: translate(-50%, -50%) scaleX(0.4); }
+    .menu-toggle[aria-expanded="true"]::before { transform: translate(-50%, -50%) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"]::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+    .mobile-menu {
+      display: grid; grid-template-rows: 0fr;
+      border-top: 1px solid transparent; background: var(--navy-950);
+      opacity: 0; visibility: hidden;
+      transition: grid-template-rows 360ms cubic-bezier(.2,.8,.2,1), opacity 260ms ease, border-color 260ms ease, visibility 0s linear 360ms;
+    }
+    .mobile-menu.is-open {
+      grid-template-rows: 1fr; opacity: 1; visibility: visible;
+      border-top-color: rgba(255,255,255,0.10);
+      transition: grid-template-rows 360ms cubic-bezier(.2,.8,.2,1), opacity 260ms ease, border-color 260ms ease;
+    }
+    .mobile-menu__inner { display: grid; min-height: 0; overflow: hidden; padding: 0; transition: padding 360ms cubic-bezier(.2,.8,.2,1); }
+    .mobile-menu.is-open .mobile-menu__inner { padding: 10px 0 18px; }
+    .mobile-menu a {
+      padding: 13px 2px; color: rgba(255,255,255,0.86); border-bottom: 1px solid rgba(255,255,255,0.08); font-weight: 800; text-decoration: none;
+      opacity: 0; transform: translateY(-12px);
+      transition: opacity 220ms ease, transform 320ms cubic-bezier(.2,.8,.2,1);
+    }
+    .mobile-menu.is-open a { opacity: 1; transform: none; }
+    .mobile-menu.is-open a:nth-child(1) { transition-delay: 70ms; }
+    .mobile-menu.is-open a:nth-child(2) { transition-delay: 120ms; }
+    .mobile-menu.is-open a:nth-child(3) { transition-delay: 170ms; }
+    .mobile-menu.is-open a:nth-child(4) { transition-delay: 220ms; }
+    .mobile-menu.is-open a:nth-child(5) { transition-delay: 270ms; }
+
+    /* ============ Buttons ============ */
+    .btn {
+      display: inline-flex; min-height: 54px; align-items: center; justify-content: center; gap: 10px;
+      padding: 14px 24px; border: 3px solid transparent; border-radius: 999px; cursor: pointer;
+      font-size: 0.98rem; font-weight: 900; line-height: 1; text-align: center; text-decoration: none;
+      transition: transform 180ms cubic-bezier(.2,.8,.2,1), background-color 180ms, border-color 180ms, box-shadow 180ms;
+    }
+    .btn:hover { transform: translateY(-3px); }
+    .btn--primary { color: var(--white); background: var(--red-600); box-shadow: 0 12px 26px rgba(211,38,56,0.34); }
+    .btn--primary:hover { background: var(--red-700); box-shadow: 0 18px 36px rgba(211,38,56,0.44); }
+    .btn--navy { color: var(--white); background: var(--navy-900); box-shadow: 0 12px 26px rgba(4,16,31,0.28); }
+    .btn--navy:hover { background: var(--navy-700); }
+    .btn--light { color: var(--navy-950); background: var(--white); border-color: rgba(255,255,255,0.7); box-shadow: 0 12px 26px rgba(4,16,31,0.18); }
+    .btn--outline { color: var(--navy-950); background: transparent; border-color: var(--navy-950); }
+    .btn--outline:hover { background: var(--navy-950); color: var(--white); }
+    .btn__icon { width: 20px; height: 20px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .card-icon, .mobile-bottom-nav__icon { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ============ Section scaffolding ============ */
+    .section { position: relative; padding: 84px 0; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; margin: 0 0 16px;
+      padding: 8px 16px; color: var(--white); background: var(--red-600);
+      border-radius: 999px; font-size: 0.72rem; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase;
+      transform: rotate(-1.5deg);
+    }
+    .eyebrow--navy { background: var(--navy-950); }
+    .section-heading { max-width: 820px; margin-bottom: 40px; }
+    .section-heading h2 {
+      margin: 0; color: var(--navy-950); font-family: var(--display); font-weight: 400;
+      font-size: clamp(2.6rem, 9vw, 6rem); line-height: 0.9; letter-spacing: 0.005em; text-transform: uppercase;
+    }
+    .section-heading h2 .hl { color: var(--red-600); }
+    .section-heading p { max-width: 640px; margin: 20px 0 0; color: var(--gray-600); font-size: clamp(1rem, 2.6vw, 1.16rem); }
+    .section--navy { color: var(--white); background: var(--navy-950); }
+    .section--navy .section-heading h2 { color: var(--white); }
+    .section--navy .section-heading p { color: rgba(255,255,255,0.78); }
+
+    /* ============ Reveal animation ============ */
+    .reveal { opacity: 0; transform: translateY(46px); transition: opacity 720ms cubic-bezier(.2,.8,.2,1), transform 720ms cubic-bezier(.2,.8,.2,1); }
+    .reveal.in { opacity: 1; transform: none; }
+    [data-reveal-delay="1"] { transition-delay: 90ms; }
+    [data-reveal-delay="2"] { transition-delay: 180ms; }
+    [data-reveal-delay="3"] { transition-delay: 270ms; }
+    [data-reveal-delay="4"] { transition-delay: 360ms; }
+    [data-reveal-delay="5"] { transition-delay: 450ms; }
+
+    /* ============ Hero ============ */
+    .hero {
+      position: relative; overflow: hidden; color: var(--white);
+      background:
+        radial-gradient(120% 90% at 85% 10%, rgba(239,51,71,0.30) 0%, transparent 46%),
+        radial-gradient(90% 90% at 10% 90%, rgba(23,59,99,0.55) 0%, transparent 55%),
+        linear-gradient(150deg, var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
+    }
+    .hero__stripes {
+      position: absolute; left: -10%; bottom: 0; width: 120%; height: 26px; z-index: 4;
+      background: repeating-linear-gradient(90deg, var(--red-600) 0 70px, var(--white) 70px 78px, var(--navy-700) 78px 148px);
+      transform: skewX(-12deg);
+    }
+    .hero__inner {
+      position: relative; z-index: 3; display: grid; gap: 20px;
+      padding: 66px 0 92px; text-align: center;
+    }
+    .hero__kicker {
+      justify-self: center; display: inline-flex; align-items: center; gap: 9px; margin-bottom: 6px;
+      padding: 9px 18px; color: #ffd0d6; background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.16); border-radius: 999px;
+      font-size: 0.74rem; font-weight: 900; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .hero h1 {
+      margin: 0 auto; max-width: 15ch; font-family: var(--display); font-weight: 400;
+      font-size: clamp(3.6rem, 17vw, 10rem); line-height: 0.82; letter-spacing: 0.005em;
+      text-transform: uppercase; text-shadow: 0 6px 0 rgba(0,0,0,0.18);
+    }
+    .hero h1 .red { color: var(--red-500); }
+    .hero h1 .stroke {
+      color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.85);
+      text-shadow: none;
+    }
+    .hero__sub { max-width: 620px; margin: 22px auto 0; color: rgba(255,255,255,0.82); font-size: clamp(1rem, 3vw, 1.22rem); }
+    .hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+    .service-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+    .service-badges li {
+      padding: 8px 15px; color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06); border-radius: 999px; font-size: 0.78rem; font-weight: 800;
+    }
+
+    /* Floating cutout food (parallax) */
+    .hero__food { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+    .float {
+      position: absolute; will-change: transform;
+      filter: drop-shadow(0 30px 34px rgba(0,0,0,0.45));
+    }
+    .float img { width: 100%; height: auto; animation: bob 7s ease-in-out infinite; }
+    .float--2 img { animation-duration: 8.4s; animation-delay: -1.2s; }
+    .float--3 img { animation-duration: 6.2s; animation-delay: -0.6s; }
+    .float--4 img { animation-duration: 9s; animation-delay: -2s; }
+    .float--5 img { animation-duration: 7.6s; animation-delay: -3s; }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+      50% { transform: translateY(-22px) rotate(calc(var(--rot, 0deg) * -1)); }
+    }
+    .f-burger { width: clamp(150px, 26vw, 340px); top: 6%; left: -3%; --rot: -8deg; }
+    .f-pizza  { width: clamp(120px, 20vw, 260px); top: 4%; right: -2%; --rot: 10deg; }
+    .f-beer   { width: clamp(80px, 12vw, 150px); bottom: 12%; left: 5%; --rot: -6deg; }
+    .f-pancake{ width: clamp(110px, 18vw, 230px); bottom: 6%; right: 3%; --rot: 7deg; }
+    .f-chicken{ width: clamp(90px, 13vw, 160px); top: 40%; right: 12%; --rot: -5deg; }
+    @media (max-width: 700px) {
+      .f-beer, .f-chicken { display: none; }
+      .f-burger { top: 2%; left: -12%; opacity: 0.85; }
+      .f-pizza { top: 1%; right: -12%; opacity: 0.85; }
+    }
+
+    /* ============ Quick action bar ============ */
+    .quick { position: relative; z-index: 5; margin-top: 26px; }
+    .quick__grid {
+      display: grid; gap: 12px; padding: 16px;
+      background: var(--white); border: 3px solid var(--navy-950);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+    }
+    .quick-card {
+      min-height: 100%; display: grid; grid-template-columns: 48px 1fr auto; align-items: center; gap: 13px;
+      padding: 15px; color: var(--navy-950); background: var(--silver-100);
+      border: 2px solid transparent; border-radius: 22px; text-decoration: none;
+      transition: transform 180ms, border-color 180ms, box-shadow 180ms, background-color 180ms;
+    }
+    .quick-card:hover { transform: translateY(-4px); background: var(--white); border-color: var(--red-600); box-shadow: var(--shadow-sm); }
+    .quick-card__icon { width: 48px; height: 48px; display: grid; place-items: center; color: var(--white); background: var(--red-600); border-radius: 14px; }
+    .quick-card__icon .card-icon { width: 22px; height: 22px; }
+    .quick-card__copy strong { display: block; font-size: 0.98rem; }
+    .quick-card__copy span { display: block; margin-top: 2px; color: var(--gray-600); font-size: 0.78rem; line-height: 1.35; }
+    .quick-card__arrow { color: var(--red-600); font-size: 1.3rem; font-weight: 900; }
+
+    /* ============ About ============ */
+    .about { background: var(--white); }
+    .about-grid { display: grid; gap: 34px; align-items: center; }
+    .about-copy p { margin: 0; color: var(--gray-700); font-size: 1.05rem; }
+    .about-copy p + p { margin-top: 16px; }
+    .about-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 12px; margin-top: 34px; }
+    .about-stat {
+      position: relative; min-height: 190px; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 20px; color: var(--white); background: var(--navy-900); border-radius: 24px; box-shadow: var(--shadow-sm);
+    }
+    .about-stat:nth-child(2), .about-stat:nth-child(3) { background: var(--red-600); }
+    .about-stat:nth-child(odd) { transform: rotate(-1.2deg); }
+    .about-stat:nth-child(even) { transform: rotate(1.2deg); }
+    .about-stat strong { font-family: var(--display); font-weight: 400; font-size: 1.7rem; line-height: 1; text-transform: uppercase; }
+    .about-stat span { margin-top: 8px; color: rgba(255,255,255,0.78); font-size: 0.78rem; font-weight: 700; line-height: 1.3; }
+    /* "Bucket" of cutout food spilling out of the top of each card */
+    .about-stat__bucket {
+      position: absolute; top: 0; left: 0; right: 0; height: 0;
+      display: flex; justify-content: center; pointer-events: none;
+    }
+    .about-stat__bucket img {
+      width: clamp(64px, 8vw, 96px); height: clamp(64px, 8vw, 96px); object-fit: contain;
+      margin: 0 -16px; filter: drop-shadow(0 14px 16px rgba(0,0,0,0.35));
+      transform: translateY(-8%) rotate(-10deg);
+      transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+    }
+    .about-stat__bucket img:nth-child(2) { transform: translateY(-18%) rotate(4deg) scale(1.12); z-index: 1; }
+    .about-stat__bucket img:nth-child(3) { transform: translateY(-5%) rotate(12deg); }
+    .about-stat:hover .about-stat__bucket img { transform: translateY(-18%) rotate(-14deg); }
+    .about-stat:hover .about-stat__bucket img:nth-child(2) { transform: translateY(-30%) rotate(0deg) scale(1.2); }
+    .about-stat:hover .about-stat__bucket img:nth-child(3) { transform: translateY(-14%) rotate(18deg); }
+
+    /* ============ Category carousel ============ */
+    .cats { background: var(--cream); overflow: hidden; }
+    .cats__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
+    .cats__hint { display: inline-flex; align-items: center; gap: 8px; color: var(--gray-600); font-size: 0.82rem; font-weight: 800; }
+    .cats__hint svg { width: 20px; height: 20px; }
+    .carousel {
+      display: flex; gap: 22px; margin-top: 10px; padding: 96px 6px 34px;
+      overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab; user-select: none;
+    }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel.dragging { scroll-snap-type: none; cursor: grabbing; scroll-behavior: auto; }
+    .carousel.dragging .cat-card { pointer-events: none; }
+    .carousel__controls { display: none; gap: 10px; }
+    .carousel__btn {
+      width: 52px; height: 52px; display: grid; place-items: center;
+      border: 3px solid var(--navy-950); background: var(--white); color: var(--navy-950);
+      border-radius: 50%; cursor: pointer; font-size: 1.3rem; font-weight: 900;
+      transition: transform 160ms, background-color 160ms, color 160ms; box-shadow: var(--shadow-sm);
+    }
+    .carousel__btn:hover { transform: translateY(-3px); background: var(--red-600); border-color: var(--red-600); color: var(--white); }
+    @media (min-width: 820px) { .carousel__controls { display: inline-flex; } }
+    .cat-card {
+      position: relative; flex: 0 0 clamp(260px, 78vw, 320px); scroll-snap-align: center;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 400px; padding: 26px; margin-top: 40px;
+      color: var(--white); background: linear-gradient(160deg, var(--navy-800), var(--navy-950));
+      border: 3px solid var(--navy-950); border-radius: var(--radius-lg);
+      transition: transform 300ms cubic-bezier(.2,.8,.2,1), box-shadow 300ms;
+    }
+    .cat-card:nth-child(3n+2) { background: linear-gradient(160deg, var(--red-500), var(--red-700)); border-color: var(--red-700); }
+    .cat-card:nth-child(3n+3) { background: linear-gradient(160deg, #12447a, var(--navy-950)); }
+    .cat-card__img {
+      position: absolute; top: -46px; left: 50%; width: 200px; transform: translateX(-50%) rotate(-4deg);
+      filter: drop-shadow(0 22px 26px rgba(0,0,0,0.4));
+      transition: transform 340ms cubic-bezier(.2,.8,.2,1);
+    }
+    .cat-card:hover {
+      transform: translateY(-14px) rotate(0.5deg);
+      box-shadow: 0 34px 60px rgba(211,38,56,0.42);
+    }
+    .cat-card:nth-child(3n+1):hover, .cat-card:nth-child(3n+3):hover { box-shadow: 0 34px 60px rgba(23,59,99,0.6); }
+    .cat-card:hover .cat-card__img { transform: translateX(-50%) rotate(4deg) scale(1.18) translateY(-14px); }
+    .cat-card__num { font-family: var(--display); font-weight: 400; font-size: 0.9rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em; }
+    .cat-card h3 { margin: 6px 0 0; font-family: var(--display); font-weight: 400; font-size: 2.1rem; line-height: 0.95; text-transform: uppercase; }
+    .cat-card p { margin: 10px 0 0; color: rgba(255,255,255,0.8); font-size: 0.86rem; line-height: 1.45; }
+    .cat-card__foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.18); }
+    .cat-card__price { display: flex; flex-direction: column; }
+    .cat-card__price span { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+    .cat-card__price strong { font-family: var(--display); font-weight: 400; font-size: 1.9rem; line-height: 1; }
+    .cat-card__pill { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--navy-950); font-size: 1.2rem; font-weight: 900; flex: 0 0 auto; }
+    .cats__note { margin: 30px 0 0; color: var(--gray-600); font-size: 0.84rem; }
+
+    /* ============ Menus (real images) ============ */
+    .menus { background: var(--white); }
+    .menu-grid { display: grid; gap: 22px; }
+    .menu-card {
+      overflow: hidden; background: var(--cream); border: 3px solid var(--navy-950);
+      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+      transition: transform 240ms, box-shadow 240ms;
+    }
+    .menu-card:hover { transform: translateY(-8px); box-shadow: 0 30px 55px rgba(4,16,31,0.24); }
+    .menu-card__preview {
+      position: relative; width: 100%; min-height: 340px; overflow: hidden; display: block; padding: 0; border: 0;
+      color: inherit; background: linear-gradient(135deg, rgba(7,27,51,0.05), rgba(211,38,56,0.07)), var(--silver-100); cursor: zoom-in;
+    }
+    .menu-card__preview img { width: 100%; height: 100%; min-height: 340px; max-height: 520px; object-fit: contain; padding: 18px; transition: transform 260ms ease; }
+    .menu-card__preview:hover img { transform: scale(1.04); }
+    .menu-card__placeholder { position: absolute; inset: 16px; display: none; place-items: center; padding: 26px; color: var(--navy-900); border: 3px dashed rgba(7,27,51,0.22); background: var(--white); border-radius: 18px; text-align: center; }
+    .menu-card__placeholder strong { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1; text-transform: uppercase; }
+    .menu-card__placeholder span { display: block; margin-top: 10px; color: var(--gray-600); font-size: 0.84rem; line-height: 1.4; }
+    .menu-card__zoom-badge {
+      position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 7px;
+      padding: 9px 13px; color: var(--white); background: rgba(4,16,31,0.9); border-radius: 999px;
+      font-size: 0.77rem; font-weight: 900; pointer-events: none; backdrop-filter: blur(8px);
+    }
+    .menu-card__zoom-badge .btn__icon { width: 16px; height: 16px; }
+    .menu-card__body { padding: 20px; border-top: 3px solid var(--navy-950); background: var(--white); }
+    .menu-card__body h3 { margin: 0; color: var(--navy-950); font-family: var(--display); font-weight: 400; font-size: 1.5rem; line-height: 1.05; text-transform: uppercase; }
+    .menu-card__body p { margin: 8px 0 0; color: var(--gray-600); font-size: 0.9rem; }
+    .menu-card__actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+    .menu-card__actions .btn { min-height: 46px; flex: 1 1 145px; padding: 11px 15px; font-size: 0.82rem; }
+    .menu-note { margin: 26px 0 0; padding: 16px 18px; color: var(--gray-700); border-left: 6px solid var(--red-600); background: var(--cream); border-radius: 0 16px 16px 0; font-size: 0.88rem; box-shadow: var(--shadow-sm); }
+
+    /* ============ Visit ============ */
+    .visit { background: var(--cream); }
+    .visit-grid { display: grid; gap: 22px; }
+    .visit-card, .map-card, .hours-card { background: var(--white); border: 3px solid var(--navy-950); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+    .visit-card { padding: 28px; }
+    .visit-card h3, .hours-card h3 { margin: 0; color: var(--navy-950); font-family: var(--display); font-weight: 400; font-size: 2.1rem; line-height: 1; text-transform: uppercase; }
+    .contact-list { display: grid; gap: 14px; margin: 24px 0 0; padding: 0; list-style: none; }
+    .contact-list li { display: grid; grid-template-columns: 46px 1fr; align-items: center; gap: 13px; }
+    .contact-list__icon { width: 46px; height: 46px; display: grid; place-items: center; color: var(--white); background: var(--red-600); border-radius: 14px; }
+    .contact-list__icon .card-icon { width: 22px; height: 22px; }
+    .contact-list strong { display: block; color: var(--navy-950); font-size: 0.9rem; }
+    .contact-list a, .contact-list span { color: var(--gray-700); font-size: 0.9rem; }
+    .visit-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+    .visit-actions .btn { flex: 1 1 150px; }
+
+    .map-card { min-height: 360px; position: relative; overflow: hidden; display: grid; place-items: center; padding: 26px; color: var(--white); text-align: center;
+      background: linear-gradient(rgba(7,27,51,0.82), rgba(7,27,51,0.92)), repeating-linear-gradient(45deg, rgba(255,255,255,0.08) 0 2px, transparent 2px 18px), var(--navy-800); }
+    .map-card__content { position: relative; z-index: 1; max-width: 440px; }
+    .map-pin { width: 70px; height: 70px; display: grid; place-items: center; margin: 0 auto 18px; color: var(--white); background: var(--red-600); border: 5px solid rgba(255,255,255,0.2); border-radius: 50% 50% 50% 12%; transform: rotate(-45deg); box-shadow: 0 18px 30px rgba(0,0,0,0.3); }
+    .map-pin .card-icon { width: 30px; height: 30px; transform: rotate(45deg); }
+    .map-card h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(2rem, 8vw, 3.2rem); line-height: 0.95; text-transform: uppercase; }
+    .map-card p { margin: 12px 0 20px; color: rgba(255,255,255,0.78); }
+
+    .hours-card { margin-top: 22px; padding: 28px; }
+    .hours-card > p { margin: 12px 0 0; color: var(--gray-700); }
+    .hours-columns { display: grid; gap: 14px; margin-top: 22px; }
+    .hours-group { overflow: hidden; border: 2px solid var(--silver-200); border-radius: 20px; background: var(--cream); }
+    .hours-group h4 { margin: 0; padding: 12px 16px; background: var(--navy-950); color: var(--white); font-family: var(--display); font-weight: 400; font-size: 1.25rem; letter-spacing: 0.04em; line-height: 1; text-transform: uppercase; }
+    .hours-group--bar h4 { background: var(--red-600); }
+    .hours-list { display: grid; margin: 0; padding: 4px 16px; }
+    .hours-list div { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid var(--silver-200); color: var(--gray-700); font-size: 0.88rem; }
+    .hours-list div:last-child { border-bottom: 0; }
+    .hours-list dt, .hours-list dd { margin: 0; }
+    .hours-list dt { color: var(--navy-950); font-weight: 900; }
+    .hours-list dd { text-align: right; font-weight: 800; }
+    .hours-note { margin-top: 14px !important; font-size: 0.82rem; line-height: 1.5; color: var(--gray-600); }
+    @media (min-width: 560px) { .hours-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+    /* ============ Final CTA ============ */
+    .final-cta { position: relative; overflow: hidden; text-align: center; }
+    .final-cta__inner { position: relative; z-index: 1; max-width: 900px; margin-inline: auto; }
+    .final-cta h2 { margin: 0; color: var(--white); font-family: var(--display); font-weight: 400; font-size: clamp(3rem, 14vw, 7rem); line-height: 0.86; text-transform: uppercase; }
+    .final-cta h2 .red { color: var(--red-500); }
+    .final-cta p { max-width: 620px; margin: 22px auto 0; color: rgba(255,255,255,0.8); font-size: 1.06rem; }
+    .final-cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 30px; }
+    .final-cta__actions .btn { flex: 1 1 160px; max-width: 240px; }
+    .final-cta .float { position: absolute; z-index: 0; opacity: 0.9; }
+    .cta-food-1 { width: clamp(120px, 18vw, 220px); top: -20px; left: -10px; --rot: -10deg; }
+    .cta-food-2 { width: clamp(120px, 18vw, 220px); bottom: -30px; right: -10px; --rot: 12deg; }
+    @media (max-width: 700px) { .final-cta .float { display: none; } }
+
+    /* ============ Footer ============ */
+    .site-footer { padding: 44px 0 96px; color: rgba(255,255,255,0.74); background: var(--navy-950); }
+    .footer-grid { display: grid; gap: 28px; }
+    .footer-brand h2 { margin: 0; color: var(--white); font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1; text-transform: uppercase; }
+    .footer-brand p { margin: 9px 0 0; font-size: 0.88rem; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+    .footer-links a { color: var(--white); font-size: 0.88rem; font-weight: 800; text-underline-offset: 4px; }
+    .footer-meta { display: grid; gap: 4px; font-size: 0.84rem; }
+    .footer-meta a { color: inherit; }
+    .footer-bottom { margin-top: 30px; padding-top: 18px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.76rem; }
+
+    /* ============ Mobile bottom nav ============ */
+    .mobile-bottom-nav {
+      position: fixed; right: 10px; bottom: calc(10px + env(safe-area-inset-bottom)); left: 10px; z-index: 1100;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 7px;
+      border: 1px solid rgba(255,255,255,0.1); background: rgba(4,16,31,0.96); border-radius: 20px;
+      box-shadow: 0 18px 55px rgba(4,16,31,0.4); backdrop-filter: blur(14px);
+    }
+    .mobile-bottom-nav a { min-height: 50px; display: grid; place-items: center; gap: 2px; padding: 6px 4px; color: rgba(255,255,255,0.84); border-radius: 14px; font-size: 0.69rem; font-weight: 900; line-height: 1; text-decoration: none; }
+    .mobile-bottom-nav a:first-child { color: var(--white); background: var(--red-600); }
+    .mobile-bottom-nav__icon { width: 19px; height: 19px; }
+
+    /* ============ Lightbox ============ */
+    .lightbox { position: fixed; inset: 0; z-index: 3000; display: none; grid-template-rows: auto minmax(0, 1fr) auto; color: var(--white); background: rgba(2,8,16,0.96); }
+    .lightbox.is-open { display: grid; }
+    .lightbox__topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(4,16,31,0.9); }
+    .lightbox__title { min-width: 0; overflow: hidden; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; }
+    .lightbox__controls { display: flex; align-items: center; gap: 7px; }
+    .lightbox__button { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.18); color: var(--white); background: rgba(255,255,255,0.08); border-radius: 12px; cursor: pointer; }
+    .lightbox__button:hover { background: rgba(255,255,255,0.14); }
+    .lightbox__stage { min-height: 0; position: relative; overflow: auto; display: grid; place-items: start center; padding: 20px 58px; overscroll-behavior: contain; touch-action: pan-x pan-y; }
+    .lightbox__image-wrap { min-width: min(100%, 850px); display: grid; place-items: center; transform-origin: top center; transition: transform 120ms ease; }
+    .lightbox__image { width: min(100%, 1100px); height: auto; max-width: none; background: var(--white); box-shadow: 0 28px 80px rgba(0,0,0,0.5); }
+    .lightbox__nav { width: 46px; height: 64px; position: fixed; top: 50%; z-index: 2; display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.16); color: var(--white); background: rgba(4,16,31,0.76); border-radius: 12px; cursor: pointer; transform: translateY(-50%); backdrop-filter: blur(10px); }
+    .lightbox__nav--prev { left: 8px; }
+    .lightbox__nav--next { right: 8px; }
+    .lightbox__footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(4,16,31,0.92); }
+    .lightbox__footer .btn { min-height: 44px; padding: 10px 14px; font-size: 0.79rem; }
+    .lightbox__counter { color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 800; }
+
+    /* ============ Responsive ============ */
+    @media (min-width: 600px) {
+      body { padding-bottom: 0; }
+      .hero__actions .btn, .final-cta__actions .btn { flex: 0 0 auto; }
+      .quick__grid, .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .footer-grid { grid-template-columns: 1.2fr 1fr; }
+      .mobile-bottom-nav { display: none; }
+      .site-footer { padding-bottom: 44px; }
+      .header-directions { display: inline-flex; }
+    }
+    @media (min-width: 820px) {
+      .section { padding: 112px 0; }
+      .hero__inner { min-height: 680px; padding: 84px 0 104px; align-content: center; }
+      .quick__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .quick-card { grid-template-columns: 48px 1fr; }
+      .quick-card__arrow { display: none; }
+      .about-grid { grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr); gap: 74px; }
+      .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .visit-grid { grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr); }
+      .footer-grid { grid-template-columns: 1.35fr 0.85fr 1fr; align-items: start; }
+    }
+    @media (min-width: 980px) {
+      .desktop-nav { display: flex; }
+      .menu-toggle, .mobile-menu { display: none !important; }
+      .header-actions .btn { padding: 12px 18px; font-size: 0.9rem; }
+    }
+    @media (max-width: 420px) {
+      .brand__text span { display: none; }
+      .brand__text strong { max-width: 116px; font-size: 1rem; }
+      .header-directions { display: none; }
+      .lightbox__stage { padding-inline: 10px; }
+      .lightbox__nav { top: auto; bottom: 70px; width: 42px; height: 46px; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Grizzy’s Diner & Tavern",
+    "description": "A local Berlin, Wisconsin diner and tavern serving breakfast, burgers, wings, pizza, entrées, cold drinks, carry out, and delivery.",
+    "url": "https://www.example.com/",
+    "logo": "https://www.example.com/assets/grizzys-logo.png",
+    "image": "https://www.example.com/assets/grizzys-logo.png",
+    "telephone": "+1-920-361-7693",
+    "priceRange": "$$",
+    "servesCuisine": ["American", "Diner", "Tavern Food", "Breakfast", "Burgers", "Wings", "Pizza"],
+    "hasMenu": "https://www.example.com/#menus",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "186 Broadway St",
+      "addressLocality": "Berlin",
+      "addressRegion": "WI",
+      "postalCode": "54923",
+      "addressCountry": "US"
+    },
+    "areaServed": { "@type": "City", "name": "Berlin, Wisconsin" },
+    "sameAs": ["https://www.facebook.com/profile.php?id=61587055480446"],
+    "potentialAction": [
+      { "@type": "CommunicateAction", "target": "tel:+19203617693", "name": "Call Grizzy’s Diner & Tavern" },
+      { "@type": "ViewAction", "target": "https://www.google.com/maps/dir/?api=1&destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923", "name": "Get directions to Grizzy’s Diner & Tavern" }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- Top slogan marquee -->
+  <div class="marquee marquee--navy" aria-hidden="true">
+    <div class="marquee__track">
+      <div class="marquee__group">
+        <span class="marquee__item">Great Food</span>
+        <span class="marquee__item">Cold Drinks</span>
+        <span class="marquee__item">Good Times</span>
+        <span class="marquee__item">Berlin, WI</span>
+        <span class="marquee__item">Dine-In</span>
+        <span class="marquee__item">Carry Out</span>
+        <span class="marquee__item">Delivery</span>
+      </div>
+      <div class="marquee__group">
+        <span class="marquee__item">Great Food</span>
+        <span class="marquee__item">Cold Drinks</span>
+        <span class="marquee__item">Good Times</span>
+        <span class="marquee__item">Berlin, WI</span>
+        <span class="marquee__item">Dine-In</span>
+        <span class="marquee__item">Carry Out</span>
+        <span class="marquee__item">Delivery</span>
+      </div>
+    </div>
+  </div>
+
+  <header class="site-header" aria-label="Main navigation">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="Grizzy’s Diner & Tavern home">
+        <span class="brand__mark" aria-hidden="true">
+          <img src="assets/grizzys-logo.png" alt="" data-fallback-target="header-logo-fallback">
+          <span class="brand__fallback" id="header-logo-fallback">G</span>
+        </span>
+        <span class="brand__text">
+          <strong>Grizzy’s</strong>
+          <span>Diner &amp; Tavern</span>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Desktop navigation">
+        <a href="#home">Home</a>
+        <a href="#menu-categories">Food</a>
+        <a href="#menus">Menus</a>
+        <a href="#visit">Location</a>
+        <a href="tel:9203617693">Call</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="btn btn--primary" href="tel:9203617693" aria-label="Call Grizzy’s Diner & Tavern">
+          <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+          Call
+        </a>
+        <a class="btn btn--light header-directions" href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Directions</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open navigation menu"><span></span></button>
+      </div>
+    </div>
+
+    <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+      <div class="container mobile-menu__inner">
+        <a href="#home">Home</a>
+        <a href="#menu-categories">Our Food</a>
+        <a href="#menus">View Menus</a>
+        <a href="#visit">Visit Grizzy’s</a>
+        <a href="tel:9203617693">Call (920) 361-7693</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="home">
+      <div class="hero__food" aria-hidden="true">
+        <div class="float f-burger" data-parallax data-speed="0.14"><img src="https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4137.png" alt="" loading="eager" data-cutout></div>
+        <div class="float f-pizza float--2" data-parallax data-speed="-0.10"><img src="https://pngimg.com/uploads/pizza/pizza_PNG44088.png" alt="" loading="eager" data-cutout></div>
+        <div class="float f-beer float--3" data-parallax data-speed="0.20"><img src="https://pngimg.com/uploads/beer/beer_PNG2340.png" alt="" loading="lazy" data-cutout></div>
+        <div class="float f-pancake float--4" data-parallax data-speed="-0.16"><img src="https://pngimg.com/uploads/pancake/pancake_PNG73.png" alt="" loading="lazy" data-cutout></div>
+        <div class="float f-chicken float--5" data-parallax data-speed="0.24"><img src="https://pngimg.com/uploads/kfc/kfc_PNG29.png" alt="" loading="lazy" data-cutout></div>
+      </div>
+
+      <div class="container hero__inner">
+        <span class="hero__kicker">Local Food • Local People • Berlin, Wisconsin</span>
+        <h1>Great <span class="red">Food.</span><br><span class="stroke">Cold</span> Drinks.<br>Good <span class="red">Times.</span></h1>
+        <p class="hero__sub">Your local spot in Berlin for breakfast, burgers, wings, pizza, entrées, cold drinks, carry out, delivery — and good times with good people.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="tel:9203617693">
+            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+            Call Now
+          </a>
+          <a class="btn btn--light" href="#menus">
+            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            View Menus
+          </a>
+        </div>
+        <ul class="service-badges" aria-label="Restaurant service options">
+          <li>Dine-In</li>
+          <li>Carry Out</li>
+          <li>Delivery</li>
+          <li>186 Broadway St</li>
+        </ul>
+      </div>
+      <div class="hero__stripes" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ QUICK ACTIONS ============ -->
+    <section class="quick" aria-label="Quick restaurant actions">
+      <div class="container">
+        <div class="quick__grid">
+          <a class="quick-card reveal" href="tel:9203617693">
+            <span class="quick-card__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg></span>
+            <span class="quick-card__copy"><strong>Call</strong><span>(920) 361-7693</span></span>
+            <span class="quick-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="quick-card reveal" data-reveal-delay="1" href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">
+            <span class="quick-card__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+            <span class="quick-card__copy"><strong>Directions</strong><span>186 Broadway St, Berlin</span></span>
+            <span class="quick-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="quick-card reveal" data-reveal-delay="2" href="#menus">
+            <span class="quick-card__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <span class="quick-card__copy"><strong>Menus</strong><span>Breakfast, burgers, wings &amp; more</span></span>
+            <span class="quick-card__arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="quick-card reveal" data-reveal-delay="3" href="#visit">
+            <span class="quick-card__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.6L13 22"/></svg></span>
+            <span class="quick-card__copy"><strong>Dine-In • Carry Out • Delivery</strong><span>Grab a table or call ahead</span></span>
+            <span class="quick-card__arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
+      <div class="container about-grid">
+        <div class="reveal">
+          <span class="eyebrow">Your local spot</span>
+          <div class="section-heading">
+            <h2>Welcome To <span class="hl">Grizzy’s</span></h2>
+          </div>
+          <div class="about-copy">
+            <p>Grizzy’s Diner &amp; Tavern is built around the simple stuff that keeps people coming back: good food, cold drinks, friendly service, and a place that feels easy to walk into.</p>
+            <p>Whether you’re stopping in for breakfast, grabbing carry out, meeting friends for wings, or sitting down for dinner, we keep it simple — good food, good people, good times.</p>
+          </div>
+        </div>
+        <div class="about-stats" aria-label="Grizzy’s restaurant highlights">
+          <article class="about-stat reveal">
+            <span class="about-stat__bucket" aria-hidden="true">
+              <img src="https://pngimg.com/uploads/pancake/pancake_PNG38.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/breakfast/breakfast_PNG28.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/donut/donut_PNG80.png" alt="" loading="lazy" data-cutout>
+            </span>
+            <strong>Breakfast</strong><span>Start the day with diner favorites.</span>
+          </article>
+          <article class="about-stat reveal" data-reveal-delay="1">
+            <span class="about-stat__bucket" aria-hidden="true">
+              <img src="https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4137.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/pizza/pizza_PNG44096.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/nachos/nachos_PNG13.png" alt="" loading="lazy" data-cutout>
+            </span>
+            <strong>Tavern Food</strong><span>Burgers, wings, pizza, starters &amp; more.</span>
+          </article>
+          <article class="about-stat reveal" data-reveal-delay="2">
+            <span class="about-stat__bucket" aria-hidden="true">
+              <img src="https://pngimg.com/uploads/beer/beer_PNG2340.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/beer/beer_PNG2352.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/kfc/kfc_PNG29.png" alt="" loading="lazy" data-cutout>
+            </span>
+            <strong>Cold Drinks</strong><span>Pull up a chair and stay awhile.</span>
+          </article>
+          <article class="about-stat reveal" data-reveal-delay="3">
+            <span class="about-stat__bucket" aria-hidden="true">
+              <img src="assets/grizzys-logo.png" alt="" loading="lazy" data-cutout>
+              <img src="https://pngimg.com/uploads/cheese/cheese_PNG25322.png" alt="" loading="lazy" data-cutout>
+            </span>
+            <strong>Berlin, WI</strong><span>Local, friendly, and easy to find.</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SLOGAN MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__group">
+          <span class="marquee__item">Burgers</span><span class="marquee__item">Wings</span><span class="marquee__item">Pizza</span><span class="marquee__item">Breakfast</span><span class="marquee__item">Entrées</span><span class="marquee__item">Cold Drinks</span>
+        </div>
+        <div class="marquee__group">
+          <span class="marquee__item">Burgers</span><span class="marquee__item">Wings</span><span class="marquee__item">Pizza</span><span class="marquee__item">Breakfast</span><span class="marquee__item">Entrées</span><span class="marquee__item">Cold Drinks</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ CATEGORY CAROUSEL ============ -->
+    <section class="section cats" id="menu-categories">
+      <div class="container">
+        <div class="cats__head">
+          <div class="reveal">
+            <span class="eyebrow">The good stuff</span>
+            <div class="section-heading" style="margin-bottom:0">
+              <h2>What We’re <span class="hl">Cooking</span></h2>
+            </div>
+          </div>
+          <div class="cats__hint reveal" data-reveal-delay="1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+            Swipe or drag to explore
+            <span class="carousel__controls">
+              <button class="carousel__btn" type="button" data-carousel-prev aria-label="Scroll categories left">‹</button>
+              <button class="carousel__btn" type="button" data-carousel-next aria-label="Scroll categories right">›</button>
+            </span>
+          </div>
+        </div>
+
+        <div class="carousel" data-carousel role="list" aria-label="Menu categories">
+          <article class="cat-card reveal" role="listitem">
+            <img class="cat-card__img" src="https://pngimg.com/uploads/pancake/pancake_PNG38.png" alt="" data-cutout>
+            <div class="cat-card__num">01</div>
+            <h3>Breakfast</h3>
+            <p>Eggs, skillets, omelettes, pancakes, waffles &amp; breakfast sandwiches.</p>
+            <div class="cat-card__foot">
+              <div class="cat-card__price"><span>Starting at</span><strong>$8</strong></div>
+              <a class="cat-card__pill" href="#menus" aria-label="View breakfast menu">→</a>
+            </div>
+          </article>
+
+          <article class="cat-card reveal" data-reveal-delay="1" role="listitem">
+            <img class="cat-card__img" src="https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4137.png" alt="" data-cutout>
+            <div class="cat-card__num">02</div>
+            <h3>Burgers</h3>
+            <p>Juicy handhelds, sandwiches, wraps &amp; baskets with all the fixings.</p>
+            <div class="cat-card__foot">
+              <div class="cat-card__price"><span>Starting at</span><strong>$11</strong></div>
+              <a class="cat-card__pill" href="#menus" aria-label="View burger menu">→</a>
+            </div>
+          </article>
+
+          <article class="cat-card reveal" data-reveal-delay="2" role="listitem">
+            <img class="cat-card__img" src="https://pngimg.com/uploads/kfc/kfc_PNG29.png" alt="" data-cutout>
+            <div class="cat-card__num">03</div>
+            <h3>Wings</h3>
+            <p>Crispy wings tossed in your favorite sauce — perfect for the game.</p>
+            <div class="cat-card__foot">
+              <div class="cat-card__price"><span>Starting at</span><strong>$10</strong></div>
+              <a class="cat-card__pill" href="#menus" aria-label="View wings menu">→</a>
+            </div>
+          </article>
+
+          <article class="cat-card reveal" data-reveal-delay="3" role="listitem">
+            <img class="cat-card__img" src="https://pngimg.com/uploads/pizza/pizza_PNG44096.png" alt="" data-cutout>
+            <div class="cat-card__num">04</div>
+            <h3>Pizza</h3>
+            <p>Hand-built tavern pizzas loaded with toppings and melty cheese.</p>
+            <div class="cat-card__foot">
+              <div class="cat-card__price"><span>Starting at</span><strong>$12</strong></div>
+              <a class="cat-card__pill" href="#menus" aria-label="View pizza menu">→</a>
+            </div>
+          </article>
+
+          <article class="cat-card reveal" data-reveal-delay="4" role="listitem">
+            <img class="cat-card__img" src="https://pngimg.com/uploads/breakfast/breakfast_PNG28.png" alt="" data-cutout>
+            <div class="cat-card__num">05</div>
+            <h3>Entrées</h3>
+            <p>Hearty dinner plates, comfort classics &amp; tavern favorites.</p>
+            <div class="cat-card__foot">
+              <div class="cat-card__price"><span>Starting at</span><strong>$14</strong></div>
+              <a class="cat-card__pill" href="#menus" aria-label="View entrées menu">→</a>
+            </div>
+          </article>
+
+          <article class="cat-card reveal" data-reveal-delay="5" role="listitem">
+            <img class="cat-card__img" src="https://pngimg.com/uploads/beer/beer_PNG2352.png" alt="" data-cutout>
+            <div class="cat-card__num">06</div>
+            <h3>Cold Drinks</h3>
+            <p>Ice-cold beer, tavern pours &amp; soft drinks. Pull up a chair.</p>
+            <div class="cat-card__foot">
+              <div class="cat-card__price"><span>Ask about</span><strong>Specials</strong></div>
+              <a class="cat-card__pill" href="tel:9203617693" aria-label="Call about drink specials">→</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="cats__note reveal">Sample starting prices shown — prices and availability may change. Call <a href="tel:9203617693">(920) 361-7693</a> for today’s menu.</p>
+      </div>
+    </section>
+
+    <!-- ============ REAL MENUS ============ -->
+    <section class="section menus" id="menus">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">The main event</span>
+          <h2>View Our <span class="hl">Menus</span></h2>
+          <p>Tap a menu to open it larger. Call us if you have questions or want to place a carry-out or delivery order.</p>
+        </div>
+
+        <div class="menu-grid" data-menu-gallery>
+          <article class="menu-card reveal">
+            <button class="menu-card__preview" type="button" data-lightbox-index="0" aria-label="Open breakfast menu larger">
+              <img src="assets/breakfast-menu.png" alt="Grizzy’s full breakfast menu" loading="lazy" data-fallback-target="breakfast-placeholder">
+              <span class="menu-card__placeholder" id="breakfast-placeholder" aria-hidden="true"><span><strong>Breakfast Menu</strong><span>Breakfast menu preview could not be loaded.</span></span></span>
+              <span class="menu-card__zoom-badge"><svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>Open Larger</span>
+            </button>
+            <div class="menu-card__body">
+              <h3>Breakfast Menu</h3>
+              <p>Eggs, skillets, omelettes, pancakes, waffles, breakfast sandwiches &amp; more.</p>
+              <div class="menu-card__actions">
+                <button class="btn btn--navy" type="button" data-lightbox-index="0">View Breakfast Menu</button>
+                <a class="btn btn--outline" href="assets/breakfast-menu.png" target="_blank" rel="noopener">Open Full Image</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" data-reveal-delay="1">
+            <button class="menu-card__preview" type="button" data-lightbox-index="1" aria-label="Open lunch and dinner menu front larger">
+              <img src="assets/lunch-menu-front.png" alt="Grizzy’s lunch and dinner menu front" loading="lazy" data-fallback-target="lunch-front-placeholder">
+              <span class="menu-card__placeholder" id="lunch-front-placeholder" aria-hidden="true"><span><strong>Menu Front</strong><span>Lunch and dinner menu front could not be loaded.</span></span></span>
+              <span class="menu-card__zoom-badge"><svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>Open Larger</span>
+            </button>
+            <div class="menu-card__body">
+              <h3>Lunch &amp; Dinner — Front</h3>
+              <p>Browse starters, soups, salads, burgers, sandwiches, wraps &amp; more.</p>
+              <div class="menu-card__actions">
+                <button class="btn btn--navy" type="button" data-lightbox-index="1">View Menu Front</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" data-reveal-delay="2">
+            <button class="menu-card__preview" type="button" data-lightbox-index="2" aria-label="Open lunch and dinner menu back larger">
+              <img src="assets/lunch-menu-back.png" alt="Grizzy’s lunch and dinner menu back" loading="lazy" data-fallback-target="lunch-back-placeholder">
+              <span class="menu-card__placeholder" id="lunch-back-placeholder" aria-hidden="true"><span><strong>Menu Back</strong><span>Lunch and dinner menu back could not be loaded.</span></span></span>
+              <span class="menu-card__zoom-badge"><svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>Open Larger</span>
+            </button>
+            <div class="menu-card__body">
+              <h3>Lunch &amp; Dinner — Back</h3>
+              <p>Find wings, pizza, entrées, sides, desserts &amp; other tavern favorites.</p>
+              <div class="menu-card__actions">
+                <button class="btn btn--navy" type="button" data-lightbox-index="2">View Menu Back</button>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="menu-note reveal"><strong>Menu note:</strong> Prices and availability may change. Call <a href="tel:9203617693">(920) 361-7693</a> for the most current menu information.</p>
+      </div>
+    </section>
+
+    <!-- ============ VISIT ============ -->
+    <section class="section visit" id="visit">
+      <div class="container">
+        <div class="section-heading reveal">
+          <span class="eyebrow">Grab a table</span>
+          <h2>Come See Us In <span class="hl">Berlin</span></h2>
+          <p>Stop in for breakfast, lunch, dinner, tavern favorites, or a cold drink with friends.</p>
+        </div>
+
+        <div class="visit-grid">
+          <div class="reveal">
+            <article class="visit-card">
+              <h3>Grizzy’s Diner &amp; Tavern</h3>
+              <ul class="contact-list">
+                <li>
+                  <span class="contact-list__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></span>
+                  <span><strong>Address</strong><span>186 Broadway St, Berlin, WI 54923</span></span>
+                </li>
+                <li>
+                  <span class="contact-list__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg></span>
+                  <span><strong>Phone</strong><a href="tel:9203617693">(920) 361-7693</a></span>
+                </li>
+                <li>
+                  <span class="contact-list__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                  <span><strong>Service</strong><span>Dine-in • Carry out • Delivery</span></span>
+                </li>
+              </ul>
+              <div class="visit-actions">
+                <a class="btn btn--primary" href="tel:9203617693">Call Now</a>
+                <a class="btn btn--navy" href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Get Directions</a>
+              </div>
+            </article>
+
+            <article class="hours-card" id="hours">
+              <h3>Hours</h3>
+              <p>Our diner and bar keep separate schedules, so you always know what’s open and when.</p>
+              <div class="hours-columns">
+                <section class="hours-group" aria-labelledby="diner-hours-title">
+                  <h4 id="diner-hours-title">Diner Hours</h4>
+                  <dl class="hours-list">
+                    <div><dt>Sunday–Wednesday</dt><dd>7:00 AM–8:00 PM</dd></div>
+                    <div><dt>Thursday–Saturday</dt><dd>7:00 AM–9:00 PM</dd></div>
+                  </dl>
+                </section>
+                <section class="hours-group hours-group--bar" aria-labelledby="bar-hours-title">
+                  <h4 id="bar-hours-title">Bar Hours</h4>
+                  <dl class="hours-list">
+                    <div><dt>Monday–Thursday</dt><dd>11:00 AM–Close</dd></div>
+                    <div><dt>Friday–Sunday</dt><dd>9:00 AM–Close</dd></div>
+                  </dl>
+                </section>
+              </div>
+              <p class="hours-note">Bar closing time varies. Call <a href="tel:9203617693">(920) 361-7693</a> if you’re heading in later.</p>
+            </article>
+          </div>
+
+          <article class="map-card reveal" data-reveal-delay="1" aria-label="Map and directions to Grizzy’s Diner & Tavern">
+            <div class="map-card__content">
+              <span class="map-pin" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/></svg></span>
+              <h3>Find Grizzy’s</h3>
+              <p>186 Broadway St<br>Berlin, WI 54923</p>
+              <a class="btn btn--light" href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Open Google Maps</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="section section--navy final-cta">
+      <div class="float cta-food-1" data-parallax data-speed="0.12" aria-hidden="true"><img src="https://pngimg.com/uploads/nachos/nachos_PNG13.png" alt="" data-cutout></div>
+      <div class="float cta-food-2" data-parallax data-speed="-0.12" aria-hidden="true"><img src="https://pngimg.com/uploads/donut/donut_PNG80.png" alt="" data-cutout></div>
+      <div class="container final-cta__inner">
+        <span class="eyebrow">Great Food. Cold Drinks. Good Times.</span>
+        <h2 class="reveal">Hungry? <span class="red">Let’s Fix That.</span></h2>
+        <p class="reveal" data-reveal-delay="1">Stop in, call ahead, or get directions to Grizzy’s Diner &amp; Tavern in Berlin.</p>
+        <div class="final-cta__actions reveal" data-reveal-delay="2">
+          <a class="btn btn--primary" href="tel:9203617693">Call Now</a>
+          <a class="btn btn--light" href="#menus">View Menus</a>
+          <a class="btn btn--outline" style="color:#fff;border-color:rgba(255,255,255,.4)" href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Get Directions</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h2>Grizzy’s Diner &amp; Tavern</h2>
+          <p>Great Food. Cold Drinks. Good Times.</p>
+        </div>
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="tel:9203617693">Call</a>
+          <a href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Directions</a>
+          <a href="#menus">Menus</a>
+          <a href="https://www.facebook.com/profile.php?id=61587055480446" target="_blank" rel="noopener">Facebook</a>
+        </nav>
+        <div class="footer-meta">
+          <span>186 Broadway St, Berlin, WI 54923</span>
+          <a href="tel:9203617693">(920) 361-7693</a>
+          <span>Dine-In • Carry Out • Delivery</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="current-year"></span> Grizzy’s Diner &amp; Tavern. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <nav class="mobile-bottom-nav" aria-label="Quick mobile actions">
+    <a href="tel:9203617693"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>Call</a>
+    <a href="#menus"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Menus</a>
+    <a href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</a>
+  </nav>
+
+  <div class="lightbox" id="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
+    <div class="lightbox__topbar">
+      <div class="lightbox__title" id="lightbox-title">Menu</div>
+      <div class="lightbox__controls">
+        <button class="lightbox__button" type="button" data-zoom-out aria-label="Zoom out">−</button>
+        <button class="lightbox__button" type="button" data-zoom-reset aria-label="Reset zoom">100%</button>
+        <button class="lightbox__button" type="button" data-zoom-in aria-label="Zoom in">+</button>
+        <button class="lightbox__button" type="button" data-lightbox-close aria-label="Close menu lightbox">✕</button>
+      </div>
+    </div>
+    <div class="lightbox__stage" data-lightbox-stage>
+      <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous menu">‹</button>
+      <div class="lightbox__image-wrap" data-lightbox-image-wrap><img class="lightbox__image" src="" alt=""></div>
+      <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next menu">›</button>
+    </div>
+    <div class="lightbox__footer">
+      <span class="lightbox__counter" data-lightbox-counter>1 of 3</span>
+      <a class="btn btn--primary" href="tel:9203617693">Call to Order</a>
+      <a class="btn btn--light" href="#menus" data-lightbox-close>Back to Menus</a>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      // Footer year.
+      const yearElement = document.getElementById('current-year');
+      if (yearElement) yearElement.textContent = new Date().getFullYear();
+
+      // Logo fallback (real assets).
+      document.querySelectorAll('img[data-fallback-target]').forEach((image) => {
+        const showFallback = () => {
+          image.style.display = 'none';
+          const fallback = document.getElementById(image.dataset.fallbackTarget);
+          if (fallback) fallback.style.display = fallback.classList.contains('menu-card__placeholder') ? 'grid' : 'block';
+        };
+        image.addEventListener('error', showFallback, { once: true });
+        if (image.complete && image.naturalWidth === 0) showFallback();
+      });
+
+      // Cutout food images fail gracefully (hide the floating wrapper if the remote PNG is unavailable).
+      document.querySelectorAll('img[data-cutout]').forEach((image) => {
+        const hide = () => { const host = image.closest('.float, .cat-card__img') || image; (host === image ? image : host).style.visibility = 'hidden'; };
+        image.addEventListener('error', hide, { once: true });
+        if (image.complete && image.naturalWidth === 0) hide();
+      });
+
+      // Mobile navigation.
+      const menuToggle = document.querySelector('.menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const closeMobileMenu = () => {
+        if (!menuToggle || !mobileMenu) return;
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation menu');
+        mobileMenu.classList.remove('is-open');
+      };
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', () => {
+          const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', String(!isOpen));
+          menuToggle.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+          mobileMenu.classList.toggle('is-open', !isOpen);
+        });
+        mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
+      }
+
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Scroll reveal (staggered slide-up fade-in).
+      const revealEls = document.querySelectorAll('.reveal');
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        revealEls.forEach((el) => el.classList.add('in'));
+      } else {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+          });
+        }, { threshold: 0.14, rootMargin: '0px 0px -8% 0px' });
+        revealEls.forEach((el) => io.observe(el));
+      }
+
+      // Parallax floating cutouts (hero + CTA).
+      const parallaxEls = Array.from(document.querySelectorAll('[data-parallax]'));
+      if (!prefersReduced && parallaxEls.length) {
+        let ticking = false;
+        const update = () => {
+          const vh = window.innerHeight;
+          parallaxEls.forEach((el) => {
+            const rect = el.getBoundingClientRect();
+            const center = rect.top + rect.height / 2;
+            const offset = (center - vh / 2);
+            const speed = parseFloat(el.dataset.speed || '0.1');
+            el.style.transform = `translate3d(0, ${(-offset * speed).toFixed(1)}px, 0)`;
+          });
+          ticking = false;
+        };
+        const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
+      }
+
+      // Marquees: duplicate content until each half of the track is wider than the
+      // viewport, so the -50% loop never shows a gap on wide screens.
+      document.querySelectorAll('.marquee__track').forEach((track) => {
+        const fill = () => {
+          let guard = 0;
+          while (track.scrollWidth < window.innerWidth * 2 && guard < 8) {
+            Array.from(track.children).forEach((group) => track.appendChild(group.cloneNode(true)));
+            guard += 1;
+          }
+        };
+        fill();
+      });
+
+      // Category carousel: desktop mouse support (drag to scroll, vertical wheel
+      // scrolls horizontally, prev/next buttons).
+      const carousel = document.querySelector('[data-carousel]');
+      if (carousel) {
+        carousel.addEventListener('wheel', (event) => {
+          if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+            event.preventDefault();
+            carousel.scrollLeft += event.deltaY;
+          }
+        }, { passive: false });
+
+        let isDragging = false;
+        let dragMoved = false;
+        let dragStartX = 0;
+        let dragStartScroll = 0;
+
+        carousel.addEventListener('pointerdown', (event) => {
+          if (event.pointerType !== 'mouse') return;
+          isDragging = true;
+          dragMoved = false;
+          dragStartX = event.clientX;
+          dragStartScroll = carousel.scrollLeft;
+        });
+        window.addEventListener('pointermove', (event) => {
+          if (!isDragging) return;
+          const delta = event.clientX - dragStartX;
+          if (Math.abs(delta) > 6 && !dragMoved) {
+            dragMoved = true;
+            carousel.classList.add('dragging');
+          }
+          if (dragMoved) carousel.scrollLeft = dragStartScroll - delta;
+        });
+        window.addEventListener('pointerup', () => {
+          if (!isDragging) return;
+          isDragging = false;
+          requestAnimationFrame(() => carousel.classList.remove('dragging'));
+        });
+        // Swallow the click that follows a drag so card links don't fire.
+        carousel.addEventListener('click', (event) => {
+          if (dragMoved) {
+            event.preventDefault();
+            event.stopPropagation();
+            dragMoved = false;
+          }
+        }, true);
+
+        const cardStep = () => {
+          const card = carousel.querySelector('.cat-card');
+          return card ? card.getBoundingClientRect().width + 22 : 320;
+        };
+        document.querySelector('[data-carousel-prev]')?.addEventListener('click', () => {
+          carousel.scrollBy({ left: -cardStep(), behavior: 'smooth' });
+        });
+        document.querySelector('[data-carousel-next]')?.addEventListener('click', () => {
+          carousel.scrollBy({ left: cardStep(), behavior: 'smooth' });
+        });
+      }
+
+      // ===== Menu lightbox (real menu images) =====
+      const menus = [
+        { title: 'Breakfast Menu', src: 'assets/breakfast-menu.png', alt: 'Large view of Grizzy’s full breakfast menu' },
+        { title: 'Lunch & Dinner Menu — Front', src: 'assets/lunch-menu-front.png', alt: 'Large view of Grizzy’s lunch and dinner menu front' },
+        { title: 'Lunch & Dinner Menu — Back', src: 'assets/lunch-menu-back.png', alt: 'Large view of Grizzy’s lunch and dinner menu back' }
+      ];
+      const lightbox = document.getElementById('menu-lightbox');
+      const lightboxImage = lightbox?.querySelector('.lightbox__image');
+      const lightboxTitle = document.getElementById('lightbox-title');
+      const lightboxCounter = lightbox?.querySelector('[data-lightbox-counter]');
+      const imageWrap = lightbox?.querySelector('[data-lightbox-image-wrap]');
+      const stage = lightbox?.querySelector('[data-lightbox-stage]');
+      const resetButton = lightbox?.querySelector('[data-zoom-reset]');
+      let currentIndex = 0, zoomLevel = 1, lastFocusedElement = null;
+      const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+      const applyZoom = () => { if (!imageWrap || !resetButton) return; imageWrap.style.transform = `scale(${zoomLevel})`; resetButton.textContent = `${Math.round(zoomLevel * 100)}%`; };
+      const resetZoom = () => { zoomLevel = 1; applyZoom(); if (stage) { stage.scrollTop = 0; stage.scrollLeft = 0; } };
+      const renderMenu = () => {
+        if (!lightboxImage || !lightboxTitle || !lightboxCounter) return;
+        const menu = menus[currentIndex];
+        lightboxImage.src = menu.src; lightboxImage.alt = menu.alt;
+        lightboxTitle.textContent = menu.title;
+        lightboxCounter.textContent = `${currentIndex + 1} of ${menus.length}`;
+        resetZoom();
+      };
+      const openLightbox = (index) => {
+        if (!lightbox) return;
+        currentIndex = clamp(Number(index) || 0, 0, menus.length - 1);
+        lastFocusedElement = document.activeElement;
+        renderMenu();
+        lightbox.classList.add('is-open'); lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+        lightbox.querySelector('[data-lightbox-close]')?.focus();
+      };
+      const closeLightbox = () => {
+        if (!lightbox) return;
+        lightbox.classList.remove('is-open'); lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open'); resetZoom();
+        if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
+      };
+      const changeMenu = (dir) => { currentIndex = (currentIndex + dir + menus.length) % menus.length; renderMenu(); };
+      document.querySelectorAll('[data-lightbox-index]').forEach((t) => t.addEventListener('click', () => openLightbox(t.dataset.lightboxIndex)));
+      lightbox?.querySelectorAll('[data-lightbox-close]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); closeLightbox(); }));
+      lightbox?.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => changeMenu(-1));
+      lightbox?.querySelector('[data-lightbox-next]')?.addEventListener('click', () => changeMenu(1));
+      lightbox?.querySelector('[data-zoom-in]')?.addEventListener('click', () => { zoomLevel = clamp(zoomLevel + 0.25, 0.75, 3); applyZoom(); });
+      lightbox?.querySelector('[data-zoom-out]')?.addEventListener('click', () => { zoomLevel = clamp(zoomLevel - 0.25, 0.75, 3); applyZoom(); });
+      resetButton?.addEventListener('click', resetZoom);
+      lightbox?.addEventListener('click', (e) => { if (e.target === lightbox || e.target === stage) closeLightbox(); });
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox?.classList.contains('is-open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') changeMenu(-1);
+        if (e.key === 'ArrowRight') changeMenu(1);
+        if (e.key === '+' || e.key === '=') { zoomLevel = clamp(zoomLevel + 0.25, 0.75, 3); applyZoom(); }
+        if (e.key === '-') { zoomLevel = clamp(zoomLevel - 0.25, 0.75, 3); applyZoom(); }
+        if (e.key === 'Tab') {
+          const focusable = [...lightbox.querySelectorAll('button, a[href]')].filter((el) => !el.hasAttribute('disabled'));
+          if (!focusable.length) return;
+          const first = focusable[0], last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      });
+      let touchStartX = 0;
+      stage?.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0]?.screenX || 0; }, { passive: true });
+      stage?.addEventListener('touchend', (e) => {
+        if (zoomLevel > 1) return;
+        const touchEndX = e.changedTouches[0]?.screenX || 0;
+        const distance = touchEndX - touchStartX;
+        if (Math.abs(distance) < 60) return;
+        changeMenu(distance > 0 ? -1 : 1);
+      }, { passive: true });
+    })();
+  </script>
+</body>
+</html>
