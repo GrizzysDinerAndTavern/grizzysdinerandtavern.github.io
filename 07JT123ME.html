@@ -18,9 +18,9 @@
     Brand palette preserved: deep navy, bright red, crisp white.
     All real content kept: address, phone, hours, real menu images + lightbox, SEO schema.
 
-    NOTE: The cutout food photos are TEMPORARY placeholders pulled from pngimg.com
-    (transparent background PNGs). Swap the CUTOUT_* URLs for real Grizzy's food photos
-    when available. They fail gracefully (hidden) if a URL ever goes offline.
+    NOTE: The cutout food photos are real Grizzy's dishes (top-view, transparent PNGs)
+    stored in assets/food/. Source photos live in assets/pictures/; regenerate cutouts
+    with assets/pictures/make_cutouts.py. They fail gracefully (hidden) if missing.
   -->
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -552,6 +552,8 @@
     .final-cta .float { position: absolute; z-index: 0; opacity: 0.9; }
     .cta-food-1 { width: clamp(120px, 18vw, 220px); top: -20px; left: -10px; --rot: -10deg; }
     .cta-food-2 { width: clamp(120px, 18vw, 220px); bottom: -30px; right: -10px; --rot: 12deg; }
+    .cta-food-3 { width: clamp(100px, 14vw, 180px); top: -24px; right: 4%; --rot: 8deg; }
+    .cta-food-4 { width: clamp(100px, 14vw, 180px); bottom: -26px; left: 4%; --rot: -12deg; }
     @media (max-width: 700px) { .final-cta .float { display: none; } }
 
     /* ============ Footer ============ */
@@ -739,11 +741,11 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="home">
       <div class="hero__food" aria-hidden="true">
-        <div class="float f-burger" data-parallax data-speed="0.14"><img src="https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4137.png" alt="" loading="eager" data-cutout></div>
-        <div class="float f-pizza float--2" data-parallax data-speed="-0.10"><img src="https://pngimg.com/uploads/pizza/pizza_PNG44088.png" alt="" loading="eager" data-cutout></div>
-        <div class="float f-beer float--3" data-parallax data-speed="0.20"><img src="https://pngimg.com/uploads/beer/beer_PNG2340.png" alt="" loading="lazy" data-cutout></div>
-        <div class="float f-pancake float--4" data-parallax data-speed="-0.16"><img src="https://pngimg.com/uploads/pancake/pancake_PNG73.png" alt="" loading="lazy" data-cutout></div>
-        <div class="float f-chicken float--5" data-parallax data-speed="0.24"><img src="https://pngimg.com/uploads/barbecue/barbecue_PNG54.png" alt="" loading="lazy" data-cutout></div>
+        <div class="float f-burger" data-parallax data-speed="0.14"><img src="assets/food/burger.webp" alt="" loading="eager" data-cutout></div>
+        <div class="float f-pizza float--2" data-parallax data-speed="-0.10"><img src="assets/food/taco-pizza.webp" alt="" loading="eager" data-cutout></div>
+        <div class="float f-beer float--3" data-parallax data-speed="0.20"><img src="assets/food/bloody-mary.webp" alt="" loading="lazy" data-cutout></div>
+        <div class="float f-pancake float--4" data-parallax data-speed="-0.16"><img src="assets/food/steak-eggs.webp" alt="" loading="lazy" data-cutout></div>
+        <div class="float f-chicken float--5" data-parallax data-speed="0.24"><img src="assets/food/chicken-dinner.webp" alt="" loading="lazy" data-cutout></div>
       </div>
 
       <div class="container hero__inner">
@@ -814,32 +816,28 @@
         <div class="about-stats" aria-label="Grizzy’s restaurant highlights">
           <article class="about-stat reveal">
             <span class="about-stat__bucket" aria-hidden="true">
-              <img src="https://pngimg.com/uploads/pancake/pancake_PNG38.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/breakfast/breakfast_PNG28.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/donut/donut_PNG80.png" alt="" loading="lazy" data-cutout>
+              <img src="assets/food/egg-bacon.png" alt="" loading="lazy" data-cutout>
+              <img src="assets/food/steak-eggs.webp" alt="" loading="lazy" data-cutout>
             </span>
             <strong>Breakfast</strong><span>Start the day with diner favorites.</span>
           </article>
           <article class="about-stat reveal" data-reveal-delay="1">
             <span class="about-stat__bucket" aria-hidden="true">
-              <img src="https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4137.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/pizza/pizza_PNG44096.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/nachos/nachos_PNG13.png" alt="" loading="lazy" data-cutout>
+              <img src="assets/food/burger.webp" alt="" loading="lazy" data-cutout>
+              <img src="assets/food/taco-pizza.webp" alt="" loading="lazy" data-cutout>
+              <img src="assets/food/taco-salad.png" alt="" loading="lazy" data-cutout>
             </span>
             <strong>Tavern Food</strong><span>Burgers, wings, pizza, starters &amp; more.</span>
           </article>
           <article class="about-stat reveal" data-reveal-delay="2">
             <span class="about-stat__bucket" aria-hidden="true">
-              <img src="https://pngimg.com/uploads/beer/beer_PNG2340.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/beer/beer_PNG2352.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/barbecue/barbecue_PNG54.png" alt="" loading="lazy" data-cutout>
+              <img src="assets/food/bloody-mary.webp" alt="" loading="lazy" data-cutout>
             </span>
             <strong>Cold Drinks</strong><span>Pull up a chair and stay awhile.</span>
           </article>
           <article class="about-stat reveal" data-reveal-delay="3">
             <span class="about-stat__bucket" aria-hidden="true">
               <img src="assets/grizzys-logo.png" alt="" loading="lazy" data-cutout>
-              <img src="https://pngimg.com/uploads/cheese/cheese_PNG25322.png" alt="" loading="lazy" data-cutout>
             </span>
             <strong>Berlin, WI</strong><span>Local, friendly, and easy to find.</span>
           </article>
@@ -881,7 +879,7 @@
 
         <div class="carousel" data-carousel role="list" aria-label="Menu categories">
           <article class="cat-card reveal" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/pancake/pancake_PNG38.png" alt="" data-cutout>
+            <img class="cat-card__img" src="assets/food/egg-bacon.png" alt="" data-cutout>
             <div class="cat-card__num">01</div>
             <h3>Breakfast</h3>
             <p>Eggs, skillets, omelettes, pancakes, waffles &amp; breakfast sandwiches.</p>
@@ -892,7 +890,7 @@
           </article>
 
           <article class="cat-card reveal" data-reveal-delay="1" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/burger_sandwich/burger_sandwich_PNG4137.png" alt="" data-cutout>
+            <img class="cat-card__img" src="assets/food/burger.webp" alt="" data-cutout>
             <div class="cat-card__num">02</div>
             <h3>Burgers</h3>
             <p>Juicy handhelds, sandwiches, wraps &amp; baskets with all the fixings.</p>
@@ -903,7 +901,7 @@
           </article>
 
           <article class="cat-card reveal" data-reveal-delay="2" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/barbecue/barbecue_PNG54.png" alt="" data-cutout>
+            <img class="cat-card__img" src="assets/food/cheese-curds.webp" alt="" data-cutout>
             <div class="cat-card__num">03</div>
             <h3>Wings</h3>
             <p>Crispy wings tossed in your favorite sauce — perfect for the game.</p>
@@ -914,7 +912,7 @@
           </article>
 
           <article class="cat-card reveal" data-reveal-delay="3" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/pizza/pizza_PNG44096.png" alt="" data-cutout>
+            <img class="cat-card__img" src="assets/food/taco-pizza.webp" alt="" data-cutout>
             <div class="cat-card__num">04</div>
             <h3>Pizza</h3>
             <p>Hand-built tavern pizzas loaded with toppings and melty cheese.</p>
@@ -925,7 +923,7 @@
           </article>
 
           <article class="cat-card reveal" data-reveal-delay="4" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/breakfast/breakfast_PNG28.png" alt="" data-cutout>
+            <img class="cat-card__img" src="assets/food/steak-lobster.png" alt="" data-cutout>
             <div class="cat-card__num">05</div>
             <h3>Entrées</h3>
             <p>Hearty dinner plates, comfort classics &amp; tavern favorites.</p>
@@ -936,7 +934,7 @@
           </article>
 
           <article class="cat-card reveal" data-reveal-delay="5" role="listitem">
-            <img class="cat-card__img" src="https://pngimg.com/uploads/beer/beer_PNG2352.png" alt="" data-cutout>
+            <img class="cat-card__img" src="assets/food/bloody-mary.webp" alt="" data-cutout>
             <div class="cat-card__num">06</div>
             <h3>Cold Drinks</h3>
             <p>Ice-cold beer, tavern pours &amp; soft drinks. Pull up a chair.</p>
@@ -1211,8 +1209,10 @@
 
     <!-- ============ FINAL CTA ============ -->
     <section class="section section--navy final-cta">
-      <div class="float cta-food-1" data-parallax data-speed="0.12" aria-hidden="true"><img src="https://pngimg.com/uploads/nachos/nachos_PNG13.png" alt="" data-cutout></div>
-      <div class="float cta-food-2" data-parallax data-speed="-0.12" aria-hidden="true"><img src="https://pngimg.com/uploads/donut/donut_PNG80.png" alt="" data-cutout></div>
+      <div class="float cta-food-1" data-parallax data-speed="0.12" aria-hidden="true"><img src="assets/food/taco-salad.png" alt="" data-cutout></div>
+      <div class="float cta-food-2" data-parallax data-speed="-0.12" aria-hidden="true"><img src="assets/food/fish-fry.webp" alt="" data-cutout></div>
+      <div class="float cta-food-3" data-parallax data-speed="0.18" aria-hidden="true"><img src="assets/food/chicken-dinner.webp" alt="" data-cutout></div>
+      <div class="float cta-food-4" data-parallax data-speed="-0.16" aria-hidden="true"><img src="assets/food/shrimp-basket.webp" alt="" data-cutout></div>
       <div class="container final-cta__inner">
         <span class="eyebrow">Great Food. Cold Drinks. Good Times.</span>
         <h2 class="reveal">Hungry? <span class="red">Let’s Fix That.</span></h2>
