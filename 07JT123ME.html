@@ -16,7 +16,7 @@
     REDESIGNED HOMEPAGE (modern / bold / dynamic)
     ==============================================
     Brand palette preserved: deep navy, bright red, crisp white.
-    All real content kept: address, phone, hours, real menu images + lightbox, SEO schema.
+    All real content kept: address, phone, hours, full menu pop-up (list view), SEO schema.
 
     NOTE: The cutout food photos are real Grizzy's dishes (top-view, transparent PNGs)
     stored in assets/food/. Source photos live in assets/pictures/; regenerate cutouts
@@ -423,37 +423,6 @@
     .cat-card__pill { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--white); color: var(--navy-950); font-size: 1.2rem; font-weight: 900; flex: 0 0 auto; }
     .cats__note { margin: 30px 0 0; color: var(--gray-600); font-size: 0.84rem; }
 
-    /* ============ Menus (real images) ============ */
-    .menus { background: var(--white); }
-    .menu-grid { display: grid; gap: 22px; }
-    .menu-card {
-      overflow: hidden; background: var(--cream); border: 3px solid var(--navy-950);
-      border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
-      transition: transform 240ms, box-shadow 240ms;
-    }
-    .menu-card:hover { transform: translateY(-8px); box-shadow: 0 30px 55px rgba(4,16,31,0.24); }
-    .menu-card__preview {
-      position: relative; width: 100%; min-height: 340px; overflow: hidden; display: block; padding: 0; border: 0;
-      color: inherit; background: linear-gradient(135deg, rgba(7,27,51,0.05), rgba(211,38,56,0.07)), var(--silver-100); cursor: zoom-in;
-    }
-    .menu-card__preview img { width: 100%; height: 100%; min-height: 340px; max-height: 520px; object-fit: contain; padding: 18px; transition: transform 260ms ease; }
-    .menu-card__preview:hover img { transform: scale(1.04); }
-    .menu-card__placeholder { position: absolute; inset: 16px; display: none; place-items: center; padding: 26px; color: var(--navy-900); border: 3px dashed rgba(7,27,51,0.22); background: var(--white); border-radius: 18px; text-align: center; }
-    .menu-card__placeholder strong { display: block; font-family: var(--display); font-weight: 400; font-size: 2rem; line-height: 1; text-transform: uppercase; }
-    .menu-card__placeholder span { display: block; margin-top: 10px; color: var(--gray-600); font-size: 0.84rem; line-height: 1.4; }
-    .menu-card__zoom-badge {
-      position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 7px;
-      padding: 9px 13px; color: var(--white); background: rgba(4,16,31,0.9); border-radius: 999px;
-      font-size: 0.77rem; font-weight: 900; pointer-events: none; backdrop-filter: blur(8px);
-    }
-    .menu-card__zoom-badge .btn__icon { width: 16px; height: 16px; }
-    .menu-card__body { padding: 20px; border-top: 3px solid var(--navy-950); background: var(--white); }
-    .menu-card__body h3 { margin: 0; color: var(--navy-950); font-family: var(--display); font-weight: 400; font-size: 1.5rem; line-height: 1.05; text-transform: uppercase; }
-    .menu-card__body p { margin: 8px 0 0; color: var(--gray-600); font-size: 0.9rem; }
-    .menu-card__actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
-    .menu-card__actions .btn { min-height: 46px; flex: 1 1 145px; padding: 11px 15px; font-size: 0.82rem; }
-    .menu-note { margin: 26px 0 0; padding: 16px 18px; color: var(--gray-700); border-left: 6px solid var(--red-600); background: var(--cream); border-radius: 0 16px 16px 0; font-size: 0.88rem; box-shadow: var(--shadow-sm); }
-
     /* ============ Visit ============ */
     .visit { background: var(--cream); }
     .visit-grid { display: grid; gap: 22px; }
@@ -578,30 +547,7 @@
     .mobile-bottom-nav a:first-child { color: var(--white); background: var(--red-600); }
     .mobile-bottom-nav__icon { width: 19px; height: 19px; }
 
-    /* ============ Lightbox ============ */
-    .lightbox { position: fixed; inset: 0; z-index: 3000; display: none; grid-template-rows: auto minmax(0, 1fr) auto; color: var(--white); background: rgba(2,8,16,0.96); }
-    .lightbox.is-open { display: grid; }
-    .lightbox__topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 14px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(4,16,31,0.9); }
-    .lightbox__title { min-width: 0; overflow: hidden; font-weight: 900; text-overflow: ellipsis; white-space: nowrap; }
-    .lightbox__controls { display: flex; align-items: center; gap: 7px; }
-    .lightbox__button { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.18); color: var(--white); background: rgba(255,255,255,0.08); border-radius: 12px; cursor: pointer; }
-    .lightbox__button:hover { background: rgba(255,255,255,0.14); }
-    .lightbox__stage { min-height: 0; position: relative; overflow: auto; display: grid; place-items: start center; padding: 20px 58px; overscroll-behavior: contain; touch-action: pan-x pan-y; }
-    .lightbox__image-wrap { min-width: min(100%, 850px); display: grid; place-items: center; transform-origin: top center; transition: transform 120ms ease; }
-    .lightbox__image { width: min(100%, 1100px); height: auto; max-width: none; background: var(--white); box-shadow: 0 28px 80px rgba(0,0,0,0.5); }
-    .lightbox__nav { width: 46px; height: 64px; position: fixed; top: 50%; z-index: 2; display: grid; place-items: center; border: 1px solid rgba(255,255,255,0.16); color: var(--white); background: rgba(4,16,31,0.76); border-radius: 12px; cursor: pointer; transform: translateY(-50%); backdrop-filter: blur(10px); }
-    .lightbox__nav--prev { left: 8px; }
-    .lightbox__nav--next { right: 8px; }
-    .lightbox__footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid rgba(255,255,255,0.1); background: rgba(4,16,31,0.92); }
-    .lightbox__footer .btn { min-height: 44px; padding: 10px 14px; font-size: 0.79rem; }
-    .lightbox__counter { color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 800; }
-
     /* ============ Full menu overlay (list view) ============ */
-    .menus-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin: -12px 0 30px; }
-    .menus-cta .btn { flex: 1 1 100%; }
-    .menus-cta__hint { color: var(--gray-600); font-size: 0.84rem; font-weight: 700; }
-    @media (min-width: 600px) { .menus-cta .btn { flex: 0 0 auto; } }
-
     .fullmenu { position: fixed; inset: 0; z-index: 3400; display: none; background: rgba(2, 8, 16, 0.72); }
     .fullmenu.is-open { display: grid; }
     .fullmenu__panel {
@@ -651,7 +597,7 @@
     @media (min-width: 600px) {
       body { padding-bottom: 0; }
       .hero__actions .btn, .final-cta__actions .btn { flex: 0 0 auto; }
-      .quick__grid, .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quick__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .footer-grid { grid-template-columns: 1.2fr 1fr; }
       .mobile-bottom-nav { display: none; }
       .site-footer { padding-bottom: 44px; }
@@ -664,7 +610,6 @@
       .quick-card { grid-template-columns: 48px 1fr; }
       .quick-card__arrow { display: none; }
       .about-grid { grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr); gap: 74px; }
-      .menu-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .visit-grid { grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr); }
       .footer-grid { grid-template-columns: 1.35fr 0.85fr 1fr; align-items: start; }
     }
@@ -677,8 +622,6 @@
       .brand__text span { display: none; }
       .brand__text strong { max-width: 116px; font-size: 1rem; }
       .header-directions { display: none; }
-      .lightbox__stage { padding-inline: 10px; }
-      .lightbox__nav { top: auto; bottom: 70px; width: 42px; height: 46px; transform: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.001ms !important; animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; }
@@ -698,7 +641,7 @@
     "telephone": "+1-920-361-7693",
     "priceRange": "$$",
     "servesCuisine": ["American", "Diner", "Tavern Food", "Breakfast", "Burgers", "Wings", "Pizza"],
-    "hasMenu": "https://www.example.com/#menus",
+    "hasMenu": "https://www.example.com/",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "186 Broadway St",
@@ -760,7 +703,7 @@
       <nav class="desktop-nav" aria-label="Desktop navigation">
         <a href="#home">Home</a>
         <a href="#menu-categories">Food</a>
-        <a href="#menus">Menus</a>
+        <a href="#" data-fullmenu-open>Menu</a>
         <a href="#visit">Location</a>
         <a href="#reviews">Reviews</a>
         <a href="tel:9203617693">Call</a>
@@ -780,7 +723,7 @@
       <div class="container mobile-menu__inner">
         <a href="#home">Home</a>
         <a href="#menu-categories">Our Food</a>
-        <a href="#menus">View Menus</a>
+        <a href="#" data-fullmenu-open>View Full Menu</a>
         <a href="#visit">Visit Grizzy’s</a>
         <a href="#reviews">Reviews</a>
         <a href="tel:9203617693">Call (920) 361-7693</a>
@@ -808,9 +751,9 @@
             <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
             Call Now
           </a>
-          <a class="btn btn--light" href="#menus">
+          <a class="btn btn--light" href="#" data-fullmenu-open>
             <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            View Menus
+            View Full Menu
           </a>
         </div>
         <ul class="service-badges" aria-label="Restaurant service options">
@@ -837,9 +780,9 @@
             <span class="quick-card__copy"><strong>Directions</strong><span>186 Broadway St, Berlin</span></span>
             <span class="quick-card__arrow" aria-hidden="true">→</span>
           </a>
-          <a class="quick-card reveal" data-reveal-delay="2" href="#menus">
+          <a class="quick-card reveal" data-reveal-delay="2" href="#" data-fullmenu-open>
             <span class="quick-card__icon" aria-hidden="true"><svg class="card-icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
-            <span class="quick-card__copy"><strong>Menus</strong><span>Breakfast, burgers, wings &amp; more</span></span>
+            <span class="quick-card__copy"><strong>Full Menu</strong><span>Breakfast, burgers, wings &amp; more</span></span>
             <span class="quick-card__arrow" aria-hidden="true">→</span>
           </a>
           <a class="quick-card reveal" data-reveal-delay="3" href="#visit">
@@ -937,7 +880,7 @@
             <p>Eggs, skillets, omelettes, pancakes, waffles &amp; breakfast sandwiches.</p>
             <div class="cat-card__foot">
               <div class="cat-card__price"><span>Starting at</span><strong>$8</strong></div>
-              <a class="cat-card__pill" href="#menus" aria-label="View breakfast menu">→</a>
+              <a class="cat-card__pill" href="#" data-fullmenu-open data-fullmenu-section="fm-breakfast" aria-label="View breakfast menu">→</a>
             </div>
           </article>
 
@@ -948,7 +891,7 @@
             <p>Juicy handhelds, sandwiches, wraps &amp; baskets with all the fixings.</p>
             <div class="cat-card__foot">
               <div class="cat-card__price"><span>Starting at</span><strong>$11</strong></div>
-              <a class="cat-card__pill" href="#menus" aria-label="View burger menu">→</a>
+              <a class="cat-card__pill" href="#" data-fullmenu-open data-fullmenu-section="fm-burgers" aria-label="View burger menu">→</a>
             </div>
           </article>
 
@@ -959,7 +902,7 @@
             <p>Crispy wings tossed in your favorite sauce — perfect for the game.</p>
             <div class="cat-card__foot">
               <div class="cat-card__price"><span>Starting at</span><strong>$10</strong></div>
-              <a class="cat-card__pill" href="#menus" aria-label="View wings menu">→</a>
+              <a class="cat-card__pill" href="#" data-fullmenu-open data-fullmenu-section="fm-wings" aria-label="View wings menu">→</a>
             </div>
           </article>
 
@@ -970,7 +913,7 @@
             <p>Hand-built tavern pizzas loaded with toppings and melty cheese.</p>
             <div class="cat-card__foot">
               <div class="cat-card__price"><span>Starting at</span><strong>$12</strong></div>
-              <a class="cat-card__pill" href="#menus" aria-label="View pizza menu">→</a>
+              <a class="cat-card__pill" href="#" data-fullmenu-open data-fullmenu-section="fm-pizza" aria-label="View pizza menu">→</a>
             </div>
           </article>
 
@@ -981,7 +924,7 @@
             <p>Hearty dinner plates, comfort classics &amp; tavern favorites.</p>
             <div class="cat-card__foot">
               <div class="cat-card__price"><span>Starting at</span><strong>$14</strong></div>
-              <a class="cat-card__pill" href="#menus" aria-label="View entrées menu">→</a>
+              <a class="cat-card__pill" href="#" data-fullmenu-open data-fullmenu-section="fm-entrees" aria-label="View entrées menu">→</a>
             </div>
           </article>
 
@@ -998,75 +941,6 @@
         </div>
 
         <p class="cats__note reveal">Sample starting prices shown — prices and availability may change. Call <a href="tel:9203617693">(920) 361-7693</a> for today’s menu.</p>
-      </div>
-    </section>
-
-    <!-- ============ REAL MENUS ============ -->
-    <section class="section menus" id="menus">
-      <div class="container">
-        <div class="section-heading reveal">
-          <span class="eyebrow">The main event</span>
-          <h2>View Our <span class="hl">Menus</span></h2>
-          <p>Tap a menu to open it larger. Call us if you have questions or want to place a carry-out or delivery order.</p>
-        </div>
-
-        <div class="menus-cta reveal" data-reveal-delay="1">
-          <button class="btn btn--primary" type="button" data-fullmenu-open>
-            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h7"/></svg>
-            View Full Menu
-          </button>
-          <span class="menus-cta__hint">Every item with prices &amp; photos in one easy list — no zooming needed.</span>
-        </div>
-
-        <div class="menu-grid" data-menu-gallery>
-          <article class="menu-card reveal">
-            <button class="menu-card__preview" type="button" data-lightbox-index="0" aria-label="Open breakfast menu larger">
-              <img src="assets/breakfast-menu.png" alt="Grizzy’s full breakfast menu" loading="lazy" data-fallback-target="breakfast-placeholder">
-              <span class="menu-card__placeholder" id="breakfast-placeholder" aria-hidden="true"><span><strong>Breakfast Menu</strong><span>Breakfast menu preview could not be loaded.</span></span></span>
-              <span class="menu-card__zoom-badge"><svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>Open Larger</span>
-            </button>
-            <div class="menu-card__body">
-              <h3>Breakfast Menu</h3>
-              <p>Eggs, skillets, omelettes, pancakes, waffles, breakfast sandwiches &amp; more.</p>
-              <div class="menu-card__actions">
-                <button class="btn btn--navy" type="button" data-lightbox-index="0">View Breakfast Menu</button>
-                <a class="btn btn--outline" href="assets/breakfast-menu.png" target="_blank" rel="noopener">Open Full Image</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="menu-card reveal" data-reveal-delay="1">
-            <button class="menu-card__preview" type="button" data-lightbox-index="1" aria-label="Open lunch and dinner menu front larger">
-              <img src="assets/lunch-menu-front.png" alt="Grizzy’s lunch and dinner menu front" loading="lazy" data-fallback-target="lunch-front-placeholder">
-              <span class="menu-card__placeholder" id="lunch-front-placeholder" aria-hidden="true"><span><strong>Menu Front</strong><span>Lunch and dinner menu front could not be loaded.</span></span></span>
-              <span class="menu-card__zoom-badge"><svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>Open Larger</span>
-            </button>
-            <div class="menu-card__body">
-              <h3>Lunch &amp; Dinner — Front</h3>
-              <p>Browse starters, soups, salads, burgers, sandwiches, wraps &amp; more.</p>
-              <div class="menu-card__actions">
-                <button class="btn btn--navy" type="button" data-lightbox-index="1">View Menu Front</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="menu-card reveal" data-reveal-delay="2">
-            <button class="menu-card__preview" type="button" data-lightbox-index="2" aria-label="Open lunch and dinner menu back larger">
-              <img src="assets/lunch-menu-back.png" alt="Grizzy’s lunch and dinner menu back" loading="lazy" data-fallback-target="lunch-back-placeholder">
-              <span class="menu-card__placeholder" id="lunch-back-placeholder" aria-hidden="true"><span><strong>Menu Back</strong><span>Lunch and dinner menu back could not be loaded.</span></span></span>
-              <span class="menu-card__zoom-badge"><svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35M11 8v6M8 11h6"/></svg>Open Larger</span>
-            </button>
-            <div class="menu-card__body">
-              <h3>Lunch &amp; Dinner — Back</h3>
-              <p>Find wings, pizza, entrées, sides, desserts &amp; other tavern favorites.</p>
-              <div class="menu-card__actions">
-                <button class="btn btn--navy" type="button" data-lightbox-index="2">View Menu Back</button>
-              </div>
-            </div>
-          </article>
-        </div>
-
-        <p class="menu-note reveal"><strong>Menu note:</strong> Prices and availability may change. Call <a href="tel:9203617693">(920) 361-7693</a> for the most current menu information.</p>
       </div>
     </section>
 
@@ -1279,7 +1153,7 @@
         <p class="reveal" data-reveal-delay="1">Stop in, call ahead, or get directions to Grizzy’s Diner &amp; Tavern in Berlin.</p>
         <div class="final-cta__actions reveal" data-reveal-delay="2">
           <a class="btn btn--primary" href="tel:9203617693">Call Now</a>
-          <a class="btn btn--light" href="#menus">View Menus</a>
+          <a class="btn btn--light" href="#" data-fullmenu-open>View Full Menu</a>
           <a class="btn btn--outline" style="color:#fff;border-color:rgba(255,255,255,.4)" href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Get Directions</a>
         </div>
       </div>
@@ -1296,7 +1170,7 @@
         <nav class="footer-links" aria-label="Footer navigation">
           <a href="tel:9203617693">Call</a>
           <a href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener">Directions</a>
-          <a href="#menus">Menus</a>
+          <a href="#" data-fullmenu-open>Menu</a>
           <a href="https://www.facebook.com/profile.php?id=61587055480446" target="_blank" rel="noopener">Facebook</a>
         </nav>
         <div class="footer-meta">
@@ -1313,7 +1187,7 @@
 
   <nav class="mobile-bottom-nav" aria-label="Quick mobile actions">
     <a href="tel:9203617693"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>Call</a>
-    <a href="#menus"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Menus</a>
+    <a href="#" data-fullmenu-open><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Menu</a>
     <a href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</a>
   </nav>
 
@@ -1550,28 +1424,6 @@
     </div>
   </div>
 
-  <div class="lightbox" id="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
-    <div class="lightbox__topbar">
-      <div class="lightbox__title" id="lightbox-title">Menu</div>
-      <div class="lightbox__controls">
-        <button class="lightbox__button" type="button" data-zoom-out aria-label="Zoom out">−</button>
-        <button class="lightbox__button" type="button" data-zoom-reset aria-label="Reset zoom">100%</button>
-        <button class="lightbox__button" type="button" data-zoom-in aria-label="Zoom in">+</button>
-        <button class="lightbox__button" type="button" data-lightbox-close aria-label="Close menu lightbox">✕</button>
-      </div>
-    </div>
-    <div class="lightbox__stage" data-lightbox-stage>
-      <button class="lightbox__nav lightbox__nav--prev" type="button" data-lightbox-prev aria-label="Previous menu">‹</button>
-      <div class="lightbox__image-wrap" data-lightbox-image-wrap><img class="lightbox__image" src="" alt=""></div>
-      <button class="lightbox__nav lightbox__nav--next" type="button" data-lightbox-next aria-label="Next menu">›</button>
-    </div>
-    <div class="lightbox__footer">
-      <span class="lightbox__counter" data-lightbox-counter>1 of 3</span>
-      <a class="btn btn--primary" href="tel:9203617693">Call to Order</a>
-      <a class="btn btn--light" href="#menus" data-lightbox-close>Back to Menus</a>
-    </div>
-  </div>
-
   <script>
     (() => {
       'use strict';
@@ -1585,7 +1437,7 @@
         const showFallback = () => {
           image.style.display = 'none';
           const fallback = document.getElementById(image.dataset.fallbackTarget);
-          if (fallback) fallback.style.display = fallback.classList.contains('menu-card__placeholder') ? 'grid' : 'block';
+          if (fallback) fallback.style.display = 'block';
         };
         image.addEventListener('error', showFallback, { once: true });
         if (image.complete && image.naturalWidth === 0) showFallback();
@@ -1724,80 +1576,6 @@
         });
       }
 
-      // ===== Menu lightbox (real menu images) =====
-      const menus = [
-        { title: 'Breakfast Menu', src: 'assets/breakfast-menu.png', alt: 'Large view of Grizzy’s full breakfast menu' },
-        { title: 'Lunch & Dinner Menu — Front', src: 'assets/lunch-menu-front.png', alt: 'Large view of Grizzy’s lunch and dinner menu front' },
-        { title: 'Lunch & Dinner Menu — Back', src: 'assets/lunch-menu-back.png', alt: 'Large view of Grizzy’s lunch and dinner menu back' }
-      ];
-      const lightbox = document.getElementById('menu-lightbox');
-      const lightboxImage = lightbox?.querySelector('.lightbox__image');
-      const lightboxTitle = document.getElementById('lightbox-title');
-      const lightboxCounter = lightbox?.querySelector('[data-lightbox-counter]');
-      const imageWrap = lightbox?.querySelector('[data-lightbox-image-wrap]');
-      const stage = lightbox?.querySelector('[data-lightbox-stage]');
-      const resetButton = lightbox?.querySelector('[data-zoom-reset]');
-      let currentIndex = 0, zoomLevel = 1, lastFocusedElement = null;
-      const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
-      const applyZoom = () => { if (!imageWrap || !resetButton) return; imageWrap.style.transform = `scale(${zoomLevel})`; resetButton.textContent = `${Math.round(zoomLevel * 100)}%`; };
-      const resetZoom = () => { zoomLevel = 1; applyZoom(); if (stage) { stage.scrollTop = 0; stage.scrollLeft = 0; } };
-      const renderMenu = () => {
-        if (!lightboxImage || !lightboxTitle || !lightboxCounter) return;
-        const menu = menus[currentIndex];
-        lightboxImage.src = menu.src; lightboxImage.alt = menu.alt;
-        lightboxTitle.textContent = menu.title;
-        lightboxCounter.textContent = `${currentIndex + 1} of ${menus.length}`;
-        resetZoom();
-      };
-      const openLightbox = (index) => {
-        if (!lightbox) return;
-        currentIndex = clamp(Number(index) || 0, 0, menus.length - 1);
-        lastFocusedElement = document.activeElement;
-        renderMenu();
-        lightbox.classList.add('is-open'); lightbox.setAttribute('aria-hidden', 'false');
-        document.body.classList.add('modal-open');
-        lightbox.querySelector('[data-lightbox-close]')?.focus();
-      };
-      const closeLightbox = () => {
-        if (!lightbox) return;
-        lightbox.classList.remove('is-open'); lightbox.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('modal-open'); resetZoom();
-        if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
-      };
-      const changeMenu = (dir) => { currentIndex = (currentIndex + dir + menus.length) % menus.length; renderMenu(); };
-      document.querySelectorAll('[data-lightbox-index]').forEach((t) => t.addEventListener('click', () => openLightbox(t.dataset.lightboxIndex)));
-      lightbox?.querySelectorAll('[data-lightbox-close]').forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); closeLightbox(); }));
-      lightbox?.querySelector('[data-lightbox-prev]')?.addEventListener('click', () => changeMenu(-1));
-      lightbox?.querySelector('[data-lightbox-next]')?.addEventListener('click', () => changeMenu(1));
-      lightbox?.querySelector('[data-zoom-in]')?.addEventListener('click', () => { zoomLevel = clamp(zoomLevel + 0.25, 0.75, 3); applyZoom(); });
-      lightbox?.querySelector('[data-zoom-out]')?.addEventListener('click', () => { zoomLevel = clamp(zoomLevel - 0.25, 0.75, 3); applyZoom(); });
-      resetButton?.addEventListener('click', resetZoom);
-      lightbox?.addEventListener('click', (e) => { if (e.target === lightbox || e.target === stage) closeLightbox(); });
-      document.addEventListener('keydown', (e) => {
-        if (!lightbox?.classList.contains('is-open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') changeMenu(-1);
-        if (e.key === 'ArrowRight') changeMenu(1);
-        if (e.key === '+' || e.key === '=') { zoomLevel = clamp(zoomLevel + 0.25, 0.75, 3); applyZoom(); }
-        if (e.key === '-') { zoomLevel = clamp(zoomLevel - 0.25, 0.75, 3); applyZoom(); }
-        if (e.key === 'Tab') {
-          const focusable = [...lightbox.querySelectorAll('button, a[href]')].filter((el) => !el.hasAttribute('disabled'));
-          if (!focusable.length) return;
-          const first = focusable[0], last = focusable[focusable.length - 1];
-          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-        }
-      });
-      let touchStartX = 0;
-      stage?.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0]?.screenX || 0; }, { passive: true });
-      stage?.addEventListener('touchend', (e) => {
-        if (zoomLevel > 1) return;
-        const touchEndX = e.changedTouches[0]?.screenX || 0;
-        const distance = touchEndX - touchStartX;
-        if (Math.abs(distance) < 60) return;
-        changeMenu(distance > 0 ? -1 : 1);
-      }, { passive: true });
-
       // ===== Full menu overlay (list view) =====
       const fullmenu = document.getElementById('full-menu');
       if (fullmenu) {
@@ -1831,14 +1609,15 @@
           });
         };
 
-        const openFullmenu = () => {
+        const openFullmenu = (sectionId) => {
           fullmenuLastFocus = document.activeElement;
           fullmenu.classList.add('is-open');
           fullmenu.setAttribute('aria-hidden', 'false');
           document.body.classList.add('modal-open');
-          if (fullmenuBody) fullmenuBody.scrollTop = 0;
           activeTabId = null;
-          setActiveTab(fullmenuTabs[0]?.dataset.fullmenuTarget, false);
+          const target = sectionId ? document.getElementById(sectionId) : null;
+          if (fullmenuBody) fullmenuBody.scrollTop = target ? Math.max(0, target.offsetTop - 8) : 0;
+          setActiveTab(target ? sectionId : fullmenuTabs[0]?.dataset.fullmenuTarget, Boolean(target));
           fullmenu.querySelector('[data-fullmenu-close]')?.focus();
         };
         const closeFullmenu = () => {
@@ -1848,7 +1627,10 @@
           if (fullmenuLastFocus instanceof HTMLElement) fullmenuLastFocus.focus();
         };
 
-        document.querySelectorAll('[data-fullmenu-open]').forEach((t) => t.addEventListener('click', openFullmenu));
+        document.querySelectorAll('[data-fullmenu-open]').forEach((trigger) => trigger.addEventListener('click', (event) => {
+          if (trigger.tagName === 'A') event.preventDefault();
+          openFullmenu(trigger.dataset.fullmenuSection);
+        }));
         fullmenu.querySelectorAll('[data-fullmenu-close]').forEach((b) => b.addEventListener('click', closeFullmenu));
         fullmenu.addEventListener('click', (e) => { if (e.target === fullmenu) closeFullmenu(); });
 
