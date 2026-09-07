@@ -596,6 +596,57 @@
     .lightbox__footer .btn { min-height: 44px; padding: 10px 14px; font-size: 0.79rem; }
     .lightbox__counter { color: rgba(255,255,255,0.7); font-size: 0.82rem; font-weight: 800; }
 
+    /* ============ Full menu overlay (list view) ============ */
+    .menus-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; margin: -12px 0 30px; }
+    .menus-cta .btn { flex: 1 1 100%; }
+    .menus-cta__hint { color: var(--gray-600); font-size: 0.84rem; font-weight: 700; }
+    @media (min-width: 600px) { .menus-cta .btn { flex: 0 0 auto; } }
+
+    .fullmenu { position: fixed; inset: 0; z-index: 3400; display: none; background: rgba(2, 8, 16, 0.72); }
+    .fullmenu.is-open { display: grid; }
+    .fullmenu__panel {
+      width: 100%; height: 100%; display: grid; grid-template-rows: auto auto minmax(0, 1fr);
+      overflow: hidden; background: var(--cream);
+      animation: fullmenu-in 340ms cubic-bezier(.2,.8,.2,1);
+    }
+    @keyframes fullmenu-in { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
+    @media (min-width: 820px) {
+      .fullmenu.is-open { padding: 30px; }
+      .fullmenu__panel { width: min(100%, 960px); margin-inline: auto; border: 3px solid var(--navy-950); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+    }
+    .fullmenu__topbar { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px 16px; color: var(--white); background: var(--navy-950); }
+    .fullmenu__heading { min-width: 0; display: grid; line-height: 1.2; }
+    .fullmenu__heading strong { overflow: hidden; font-family: var(--display); font-weight: 400; font-size: 1.45rem; letter-spacing: 0.03em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
+    .fullmenu__heading span { color: rgba(255,255,255,0.62); font-size: 0.7rem; font-weight: 700; }
+    .fullmenu__close { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; color: var(--white); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); border-radius: 12px; font-size: 1.05rem; cursor: pointer; }
+    .fullmenu__close:hover { background: var(--red-600); border-color: var(--red-600); }
+    .fullmenu__tabs { display: flex; gap: 8px; padding: 10px 14px; overflow-x: auto; background: var(--white); border-bottom: 3px solid var(--navy-950); scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .fullmenu__tabs::-webkit-scrollbar { display: none; }
+    .fullmenu__tab { flex: 0 0 auto; min-height: 40px; padding: 8px 15px; color: var(--navy-950); background: var(--white); border: 2px solid var(--navy-950); border-radius: 999px; font-size: 0.78rem; font-weight: 900; cursor: pointer; transition: background-color 160ms, border-color 160ms, color 160ms; }
+    .fullmenu__tab.is-active { color: var(--white); background: var(--red-600); border-color: var(--red-600); }
+    .fullmenu__body { position: relative; min-height: 0; overflow-y: auto; padding: 20px 16px calc(34px + env(safe-area-inset-bottom)); overscroll-behavior: contain; }
+    .fullmenu__section + .fullmenu__section { margin-top: 36px; }
+    .fullmenu__section h3 { display: flex; align-items: center; gap: 12px; margin: 0 0 6px; color: var(--navy-950); font-family: var(--display); font-weight: 400; font-size: 1.65rem; line-height: 1; text-transform: uppercase; }
+    .fullmenu__section h3::after { content: ""; flex: 1 1 auto; height: 4px; background: var(--red-600); border-radius: 999px; }
+    .fullmenu__note { margin: 0; color: var(--gray-600); font-size: 0.8rem; line-height: 1.5; }
+    .fullmenu__items { display: grid; gap: 10px; margin: 14px 0 0; padding: 0; list-style: none; }
+    @media (min-width: 720px) { .fullmenu__items { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .fm-item { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px; background: var(--white); border: 2px solid var(--silver-200); border-radius: 18px; }
+    .fm-item--noimg { grid-template-columns: minmax(0, 1fr); }
+    .fm-item__img { width: 64px; height: 64px; object-fit: cover; background: var(--white); border: 2px solid var(--silver-200); border-radius: 14px; }
+    .fm-item__head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .fm-item__head strong { color: var(--navy-950); font-size: 0.94rem; line-height: 1.3; }
+    .fm-item__price { flex: 0 0 auto; color: var(--red-700); font-weight: 900; font-size: 0.92rem; white-space: nowrap; }
+    .fm-item__copy p { margin: 4px 0 0; color: var(--gray-600); font-size: 0.8rem; line-height: 1.45; }
+    .fm-badge { display: inline-block; margin-left: 6px; padding: 2px 8px; color: var(--white); background: var(--red-600); border-radius: 999px; font-size: 0.58rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: 2px; }
+    .fm-sizes { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 6px; }
+    .fm-sizes span { color: var(--gray-600); font-size: 0.8rem; font-weight: 700; }
+    .fm-sizes b { color: var(--navy-950); }
+    .fullmenu__cta { display: grid; gap: 12px; margin-top: 38px; padding: 24px 22px; color: var(--white); background: var(--navy-950); border-radius: 22px; text-align: center; }
+    .fullmenu__cta strong { font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1; text-transform: uppercase; }
+    .fullmenu__cta .btn { justify-self: center; }
+    .fullmenu__disclaimer { margin: 18px 0 0; color: var(--gray-600); font-size: 0.72rem; line-height: 1.5; text-align: center; }
+
     /* ============ Responsive ============ */
     @media (min-width: 600px) {
       body { padding-bottom: 0; }
@@ -959,6 +1010,14 @@
           <p>Tap a menu to open it larger. Call us if you have questions or want to place a carry-out or delivery order.</p>
         </div>
 
+        <div class="menus-cta reveal" data-reveal-delay="1">
+          <button class="btn btn--primary" type="button" data-fullmenu-open>
+            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><path d="M9 7h7M9 11h7"/></svg>
+            View Full Menu
+          </button>
+          <span class="menus-cta__hint">Every item with prices &amp; photos in one easy list — no zooming needed.</span>
+        </div>
+
         <div class="menu-grid" data-menu-gallery>
           <article class="menu-card reveal">
             <button class="menu-card__preview" type="button" data-lightbox-index="0" aria-label="Open breakfast menu larger">
@@ -1258,6 +1317,239 @@
     <a href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</a>
   </nav>
 
+  <div class="fullmenu" id="full-menu" role="dialog" aria-modal="true" aria-labelledby="fullmenu-title" aria-hidden="true">
+    <div class="fullmenu__panel">
+      <div class="fullmenu__topbar">
+        <div class="fullmenu__heading">
+          <strong id="fullmenu-title">Full Menu</strong>
+          <span>Grizzy’s Diner &amp; Tavern — Berlin, WI</span>
+        </div>
+        <button class="fullmenu__close" type="button" data-fullmenu-close aria-label="Close full menu">✕</button>
+      </div>
+
+      <nav class="fullmenu__tabs" aria-label="Jump to a menu section">
+        <button class="fullmenu__tab is-active" type="button" data-fullmenu-target="fm-breakfast">Breakfast</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-eggs">Eggs &amp; Omelettes</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-sweet">Sweet Stuff</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-sides">Sides &amp; Drinks</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-starters">Starters</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-salads">Salads</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-burgers">Burgers</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-sandwiches">Sandwiches</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-wings">Wings</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-pizza">Pizza</button>
+        <button class="fullmenu__tab" type="button" data-fullmenu-target="fm-entrees">Entrées</button>
+      </nav>
+
+      <div class="fullmenu__body" data-fullmenu-body>
+        <section class="fullmenu__section" id="fm-breakfast">
+          <h3>Breakfast Favorites</h3>
+          <p class="fullmenu__note">Add an egg, slice of french toast, or a cake to any meal for $1.99 • Have your meal cooked in olive oil for a $0.99 add-on.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Bagel Bites</strong><span class="fm-item__price">$4.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Yogurt Parfait</strong><span class="fm-item__price">$5.99</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/uyqrrv1511553350.jpg/preview" alt="Biscuits and gravy" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Biscuits &amp; Gravy</strong><span class="fm-item__price">$6.99</span></div><p>Add 2 eggs +$1.00.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Broadway Special</strong><span class="fm-item__price">$8.99</span></div><p>2 eggs, 2 strips of bacon, sausage link, with choice of 2 pancakes or 2 slices of french toast.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/uuyrrx1487327597.jpg/preview" alt="Grizzy’s gravy boat" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grizzy’s Gravy Boat</strong><span class="fm-item__price">$9.99</span></div><p>1/2 order biscuits &amp; gravy, choice of potato, topped with 2 eggs.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Loaded Hash Brown Waffle</strong><span class="fm-item__price">$10.99</span></div><p>Hash browns, 1 egg, bacon, onions, green peppers, pepper jack, topped with another egg in waffle form — served until 11am.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/g373701551450225.jpg/preview" alt="Skillet with egg" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>“Amber’s Skillet”</strong><span class="fm-item__price">$10.99</span></div><p>Sausage, green peppers, onions, cheddar, tater tots.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Eggs Benny</strong><span class="fm-item__price">$10.99</span></div><p>Canadian bacon, English muffin, two poached eggs, &amp; hollandaise sauce.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Avocado Toast</strong><span class="fm-item__price">$10.99</span></div><p>Sourdough, avocado, cream cheese, onion, bacon bits, 1 egg, &amp; a side of fruit.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Country Fried Steak &amp; Eggs</strong><span class="fm-item__price">$12.49</span></div><p>Served with choice of potato &amp; toast.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>“G’s Plate”</strong><span class="fm-item__price">$14.99</span></div><p>Quesadilla filled with scrambled eggs, pepper jack, green peppers, onions, bacon, choice of potato, topped with salsa.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/naqyel1608588563.jpg/preview" alt="Breakfast pizza slices" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Breakfast Pizza (12"/16")</strong><span class="fm-item__price">$15.99 / $18.99</span></div><p>Sausage gravy, scrambled eggs, cheddar, mozzarella, ham, bacon, canadian bacon, sausage, thin crust — served until 11am.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>“The Colton”</strong><span class="fm-item__price">$23.99</span></div><p>8 oz. sirloin steak, 4 eggs, &amp; 4 slices of bacon.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-breakfast-sandwiches">
+          <h3>Breakfast Sandwiches</h3>
+          <p class="fullmenu__note">Served on a croissant, English muffin, or bagel with choice of fruit, tater tots, hash browns, or American fries.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Egg &amp; Cheese</strong><span class="fm-item__price">$6.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Choice of Meat &amp; Cheese</strong><span class="fm-item__price">$7.99</span></div><p>Sausage, bacon, or ham.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-eggs">
+          <h3>Country Fresh Eggs</h3>
+          <p class="fullmenu__note">Served with tater tots, hash browns or American fries, buttered toast, &amp; jelly.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/sqrtwu1511721265.jpg/preview" alt="Two eggs with bacon" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Two Eggs, Any Style</strong><span class="fm-item__price">$5.99</span></div><p>Add bacon, ham, sausage links, or sausage patties +$1.00 • Add corned beef hash +$2.26.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Chorizo &amp; Eggs</strong><span class="fm-item__price">$8.25</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Ground Angus Patty &amp; Eggs</strong><span class="fm-item__price">$11.99</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/vussxq1511882648.jpg/preview" alt="Steak and eggs" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Steak &amp; Eggs</strong><span class="fm-item__price">$15.99</span></div></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-omelettes">
+          <h3>Omelettes &amp; Skillets</h3>
+          <p class="fullmenu__note">Omelettes &amp; burritos: 3-egg omelettes served with hash browns or American fries, plus buttered toast &amp; jelly. Skillets: hash browns, American fries, or tater tots topped with 2 eggs any style &amp; your choice of toast.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg/preview" alt="Omelette with hash browns" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Garden</strong><span class="fm-item__price">$10.99</span></div><p>Mushroom, tomato, onion, green pepper, spinach, broccoli, &amp; choice of cheese.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Denver</strong><span class="fm-item__price">$10.99</span></div><p>Ham, American cheese, green pepper, onion, &amp; tomato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Meat Lover’s</strong><span class="fm-item__price">$10.99</span></div><p>Bacon, ham, sausage, &amp; American cheese.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>The Shipwreck</strong><span class="fm-item__price">$12.99</span></div><p>Bacon, ham, sausage, green peppers, onions, tomatoes, mushrooms, &amp; American cheese.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Build Your Own Omelette, Burrito, or Skillet</strong><span class="fm-item__price">$8.99</span></div><p>Base omelette (egg &amp; cheese). Add meat $0.99 • veggie $0.50 • cheese $0.50. Ingredients: bacon, green peppers, ground beef, ham, onions, sausage, spinach, tomatoes, jalapeños, mushrooms, chorizo. Cheese: American, cheddar, feta, mozzarella, pepper jack, swiss.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-sweet">
+          <h3>Sweet Stuff</h3>
+          <ul class="fullmenu__items">
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/rwuyqx1511383174.jpg/preview" alt="Stack of pancakes" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Pancakes or French Toast</strong><span class="fm-item__price">$2.99+</span></div><p>One $2.99 • two $4.99 • three $6.99. Add blueberries, strawberries, or chocolate chips +$0.99.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Plain Waffle</strong><span class="fm-item__price">$6.49</span></div><p>Add blueberries, strawberries, or chocolate chips +$0.99.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/0wmns51784837949.jpg/preview" alt="Waffle with ice cream" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Alaskan Waffle</strong><span class="fm-item__price">$8.99</span></div><p>With strawberries &amp; vanilla ice cream.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Crepes (3)</strong><span class="fm-item__price">$9.99</span></div><p>Choice of strawberry or blueberry — served until 11am.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-sides">
+          <h3>Sides &amp; Beverages</h3>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Bacon, Ham, Links, or Patties</strong><span class="fm-item__price">$3.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Hash Browns / American Fries / Tater Tots</strong><span class="fm-item__price">$3.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Party Potatoes</strong><span class="fm-item__price">$7.99</span></div><p>Hash browns topped with ham, green peppers, onions, mushrooms &amp; cheddar.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>One Egg</strong><span class="fm-item__price">$1.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Small Fruit Plate</strong><span class="fm-item__price">$3.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>English Muffin</strong><span class="fm-item__price">$2.19</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Bagel</strong><span class="fm-item__price">$2.99</span></div><p>Plain or everything.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Toast</strong><span class="fm-item__price">$1.99+</span></div><p>White, wheat, or rye $1.99 • sourdough, Texas, or raisin $2.49.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Avocado</strong><span class="fm-item__price">$3.49</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Oatmeal</strong><span class="fm-item__price">$3.99</span></div><p>Add berries +$2.00.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Coffee / Hot Tea</strong><span class="fm-item__price">$1.89</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.thecocktaildb.com/images/media/drink/xcu6nb1487603142.jpg/preview" alt="Hot chocolate with whipped cream" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Hot Chocolate</strong><span class="fm-item__price">$2.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Fruit Juices</strong><span class="fm-item__price">$2.29 / $2.99</span></div><p>Apple, orange, or cranberry.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>White Milk</strong><span class="fm-item__price">$1.69 / $1.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Chocolate Milk</strong><span class="fm-item__price">$1.89 / $2.29</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Soft Drinks</strong><span class="fm-item__price">$2.99</span></div></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-starters">
+          <h3>Starters</h3>
+          <p class="fullmenu__note">Make any starter a meal for $2.99.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grizzy’s Tendys</strong><span class="fm-item__price">$7.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Onion Rings</strong><span class="fm-item__price">$5.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Mozz Sticks</strong><span class="fm-item__price">$7.49</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/6dpa7m1763331105.jpg/preview" alt="Basket of cheese curds" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Wisco Curds</strong><span class="fm-item__price">$7.49</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Lil’ Corndogs</strong><span class="fm-item__price">$6.29</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/dk70uv1784670127.jpg/preview" alt="Pocket tacos plate" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Pocket Tacos<span class="fm-badge">New</span></strong><span class="fm-item__price">$5.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Pretzel Logs<span class="fm-badge">New</span></strong><span class="fm-item__price">$5.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Pickle Poppers<span class="fm-badge">New</span></strong><span class="fm-item__price">$7.29</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Potato Skins<span class="fm-badge">New</span></strong><span class="fm-item__price">$9.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Fox River Shrooms</strong><span class="fm-item__price">$6.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Jalapeño Poppers</strong><span class="fm-item__price">$7.49</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>French Fries</strong><span class="fm-item__price">$3.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Sweet Potato Fries</strong><span class="fm-item__price">$4.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Waffle Fries<span class="fm-badge">New</span></strong><span class="fm-item__price">$4.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grizzy’s Fry Flight<span class="fm-badge">New</span></strong><span class="fm-item__price">$5.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Loaded Cheese Fries</strong><span class="fm-item__price">$6.99</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/feh9k21784665694.jpg/preview" alt="Grizzy’s sampler platter" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grizzy’s Sampler</strong><span class="fm-item__price">$9.99</span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Chicken Quesadilla<span class="fm-badge">New</span></strong><span class="fm-item__price">$10.99</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://loremflickr.com/128/128/nachos?lock=1" alt="Super nacho plate" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Super Nacho Plate</strong><span class="fm-item__price">$12</span></div><p>Tortilla chips loaded with seasoned beef, queso, shredded cheese, lettuce, tomatoes, jalapeños, sour cream, and salsa.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.thecocktaildb.com/images/media/drink/t6caa21582485702.jpg/preview" alt="The Bombshell bloody mary" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>The Bombshell Bloody Mary</strong><span class="fm-item__price">$25</span></div><p>Onion rings, mozzarella sticks, cheese curds, chicken wings, breaded mushrooms, jalapeño poppers, deep fried pickles, sausage links, bacon, and a cheeseburger stacked on a bloody mary.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-salads">
+          <h3>Salads</h3>
+          <ul class="fullmenu__items">
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/pk8wtn1763758591.jpg/preview" alt="Chicken breast salad" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Chicken Breast</strong><span class="fm-item__price">$10.99</span></div><p>Crispy or grilled, cucumber, tomato, egg.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Cobb Salad</strong><span class="fm-item__price">$11.29</span></div><p>Turkey, bacon, black olives, cucumber, tomato, crumbled blue cheese, egg.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Julienne Salad</strong><span class="fm-item__price">$10.99</span></div><p>Mixed greens, ham, turkey, American &amp; swiss cheese, cucumber, tomato, egg.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Caesar Salad</strong><span class="fm-item__price">$10.99</span></div><p>Crispy or grilled chicken on romaine, homemade croutons, parmesan.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/7ytdtz1784833420.jpg/preview" alt="Taco salad" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Taco Salad</strong><span class="fm-item__price">$10.99</span></div><p>Seasoned beef, cheese, tomato, black olives, served in a large taco shell.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Dinner Salad</strong><span class="fm-item__price">$4.99</span></div></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-burgers">
+          <h3>Burgers</h3>
+          <p class="fullmenu__note">Served on a regular bun or pretzel bun — fresh angus beef cooked medium unless you prefer it more or less! Served with house chips. Upgrade to fries, waffle fries, or sweet potato fries +$1.99 • Double-up your beef +$2.99 • Turn any burger into a wrap +$0.99.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Wisconsin</strong><span class="fm-item__price">$8.75</span></div><p>American cheese. Add bacon — $9.75.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Big Daddy</strong><span class="fm-item__price">$9.75</span></div><p>Lettuce, tomato, onion, thousand island.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Curd</strong><span class="fm-item__price">$11.25</span></div><p>Breaded curds, bacon, cheddar, ranch.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/lgmnff1763789847.jpg/preview" alt="Cowboy burger" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Cowboy</strong><span class="fm-item__price">$11.25</span></div><p>Bacon, cheddar, haystack onions, BBQ.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Mushroom Swiss</strong><span class="fm-item__price">$9.75</span></div></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/44bzep1761848278.jpg/preview" alt="Big Grizzy burger" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Big Grizzy</strong><span class="fm-item__price">$13.75</span></div><p>Double patty, bacon, cheddar, haystack onions, BBQ ranch sauce.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Papa</strong><span class="fm-item__price">$11.75</span></div><p>Cream cheese, jalapeño poppers, cheddar, bacon, ranch.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Mad Daddy</strong><span class="fm-item__price">$11.25</span></div><p>Pepper jack cheese, chipotle sauce, haystack onions, bacon.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Hangover<span class="fm-badge">New</span></strong><span class="fm-item__price">$11.25</span></div><p>Over easy egg, bacon, American cheese.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>PB&amp;J<span class="fm-badge">New</span></strong><span class="fm-item__price">$11.25</span></div></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-sandwiches">
+          <h3>Sandwiches</h3>
+          <p class="fullmenu__note">Served on a regular bun or pretzel bun with house chips. Upgrade to fries, waffle fries, or sweet potato fries +$1.99 • Turn any sandwich into a wrap +$0.99.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Philly Cheesesteak</strong><span class="fm-item__price">$14.99</span></div><p>Shaved prime, sautéed onions, mushrooms, green peppers, mozzarella cheese.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Reuben</strong><span class="fm-item__price">$10.99</span></div><p>Corned beef on rye, swiss, sauerkraut.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grizzy’s Chicken<span class="fm-badge">New</span></strong><span class="fm-item__price">$8.99</span></div><p>Crispy or grilled chicken, lettuce, tomato, ranch or honey mustard.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Southwest Chipotle</strong><span class="fm-item__price">$10.99</span></div><p>Crispy or grilled chicken, chipotle sauce, pepper jack, bacon, lettuce, tomato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>BLT</strong><span class="fm-item__price">$5.99</span></div><p>Bacon, lettuce, tomato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Buffalo Chicken</strong><span class="fm-item__price">$9.99</span></div><p>Crispy or grilled chicken, hot sauce, melted swiss, lettuce, tomato.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/djdg8l1784578885.jpg/preview" alt="Patty melt with onion rings" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Patty Melt</strong><span class="fm-item__price">$9.99</span></div><p>Beef patty, melted swiss, caramelized onions.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/xutquv1505330523.jpg/preview" alt="Grilled cheese" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grilled Cheese</strong><span class="fm-item__price">$5.99</span></div><p>Add ham or bacon +$2.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-wings">
+          <h3>Wings</h3>
+          <p class="fullmenu__note">Crispy. Saucy. Worth the mess.</p>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Traditional Wings</strong></div><div class="fm-sizes"><span>5 <b>$5.49</b></span><span>10 <b>$10.99</b></span><span>15 <b>$16.49</b></span><span>20 <b>$21.99</b></span><span>30 <b>$29.99</b></span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Boneless Wings</strong></div><div class="fm-sizes"><span>5 <b>$6.49</b></span><span>10 <b>$12.99</b></span><span>15 <b>$19.49</b></span><span>20 <b>$25.99</b></span><span>30 <b>$38.99</b></span></div></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>The Grizzly Pile</strong><span class="fm-item__price">$26.99</span></div><p>20 wings &amp; 2 sauces piled on loaded fries &amp; drizzled.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Sauces &amp; Dry Rubs</strong></div><p>Sweet &amp; savory: honey bourbon BBQ, Grizzy’s teriyaki • Sweet heat: kickin’ garlic parmesan, garlic parmesan, sweet &amp; spicy maple • Hot &amp; spicy: bold buffalo, red hot, Nashville hot • Dry rubs: lemon pepper, brown sugar bourbon, sassy cajun, chipotle BBQ, ghost pepper ranch.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Make ’Em Grizzy Style</strong></div><p>Extra crispy +$1.00 • All flats or drums +$2.00 • Double sauce +$1.00.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-pizza">
+          <h3>Pizzas — Build Your Own</h3>
+          <ul class="fullmenu__items">
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/lrfdwz1764438393.jpg/preview" alt="12 inch pizza" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>12" Pizza</strong><span class="fm-item__price">$11.99 / $14.99</span></div><p>Thin crust $11.99 • thick crust $14.99.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/wf49qs1763075222.jpg/preview" alt="16 inch pizza" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>16" Pizza</strong><span class="fm-item__price">$14.99 / $17.99</span></div><p>Thin crust $14.99 • thick crust $17.99.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Toppings</strong><span class="fm-item__price">$0.75 / $1.25</span></div><p>Vegetable toppings $0.75 each • meat toppings $1.25 each. Pepperoni, sausage, bacon, canadian bacon, mushrooms, onions, black olives, green olives, peppers, tomatoes, spinach, pineapple, jalapeños.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-entrees">
+          <h3>Entrées</h3>
+          <ul class="fullmenu__items">
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Hamburger Steak Dinner</strong><span class="fm-item__price">$11.99</span></div><p>A seasoned, chopped steak grilled to perfection and finished with savory gravy, served with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Hot Beef Sandwich</strong><span class="fm-item__price">$12.99</span></div><p>Tender sliced prime rib piled over a bun and finished with savory gravy, served with a side of veggie.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/ursuup1487348423.jpg/preview" alt="Hot beef combo" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Hot Beef Combo</strong><span class="fm-item__price">$13.99</span></div><p>Tender sliced prime rib served open-faced with creamy mashed potatoes and smothered in savory gravy, served with a side of veggie.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/1525873040.jpg/preview" alt="Shrimp dinner" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Shrimp Dinner</strong><span class="fm-item__price">$13.99</span></div><p>Breaded shrimp, prepared for bold flavor and a soft bite, served with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/40r49m1763197022.jpg/preview" alt="Country fried steak" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Country Fried Steak</strong><span class="fm-item__price">$13.99</span></div><p>A tender breaded beef steak, golden fried, then topped with country-style gravy and served with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+            <li class="fm-item"><img class="fm-item__img" src="https://www.themealdb.com/images/media/meals/tytyxu1515363282.jpg/preview" alt="Grizzy’s signature chicken" loading="lazy" width="64" height="64"><div class="fm-item__copy"><div class="fm-item__head"><strong>Grizzy’s Signature Chicken</strong><span class="fm-item__price">$14.99</span></div><p>Smoked honey hickory grilled chicken for a sweet, smoky finish, served with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Salmon Dinner</strong><span class="fm-item__price">$17.99</span></div><p>A juicy grilled salmon fillet, prepared and served over wild rice with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Sirloin Steak</strong><span class="fm-item__price">$17.99</span></div><p>A flavorful sirloin steak, cooked for a tender, satisfying bite and served with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+            <li class="fm-item fm-item--noimg"><div class="fm-item__copy"><div class="fm-item__head"><strong>Tenderloin Steak</strong><span class="fm-item__price">$22.99</span></div><p>Tenderloin steak prepared for bold flavor and a melt in your mouth bite, served with a side of veggie, garlic bread, and choice of potato.</p></div></li>
+          </ul>
+        </section>
+
+        <section class="fullmenu__section" id="fm-desserts">
+          <h3>Desserts</h3>
+          <p class="fullmenu__note">Go ahead, you deserve it — ask your server about today’s desserts.</p>
+        </section>
+
+        <div class="fullmenu__cta">
+          <strong>Ready to order?</strong>
+          <a class="btn btn--primary" href="tel:9203617693">
+            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+            Call (920) 361-7693
+          </a>
+        </div>
+        <p class="fullmenu__disclaimer">Prices and availability may change — call for today’s menu. Whether dining out or preparing food at home, consuming raw or undercooked meat, poultry, seafood, shellfish or eggs may increase your risk of food borne illness.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="lightbox" id="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" aria-hidden="true">
     <div class="lightbox__topbar">
       <div class="lightbox__title" id="lightbox-title">Menu</div>
@@ -1505,6 +1797,94 @@
         if (Math.abs(distance) < 60) return;
         changeMenu(distance > 0 ? -1 : 1);
       }, { passive: true });
+
+      // ===== Full menu overlay (list view) =====
+      const fullmenu = document.getElementById('full-menu');
+      if (fullmenu) {
+        const fullmenuBody = fullmenu.querySelector('[data-fullmenu-body]');
+        const fullmenuTabs = Array.from(fullmenu.querySelectorAll('[data-fullmenu-target]'));
+        const spySections = fullmenuTabs
+          .map((tab) => document.getElementById(tab.dataset.fullmenuTarget))
+          .filter(Boolean);
+        let fullmenuLastFocus = null;
+        let activeTabId = null;
+
+        // Item thumbnails are hotlinked placeholders for now — if one fails to
+        // load, drop the row back to a clean text-only layout.
+        fullmenu.querySelectorAll('.fm-item__img').forEach((image) => {
+          const drop = () => {
+            const item = image.closest('.fm-item');
+            if (item) item.classList.add('fm-item--noimg');
+            image.remove();
+          };
+          image.addEventListener('error', drop, { once: true });
+          if (image.complete && image.naturalWidth === 0) drop();
+        });
+
+        const setActiveTab = (id, scrollTabIntoView) => {
+          if (!id || id === activeTabId) return;
+          activeTabId = id;
+          fullmenuTabs.forEach((tab) => {
+            const isActive = tab.dataset.fullmenuTarget === id;
+            tab.classList.toggle('is-active', isActive);
+            if (isActive && scrollTabIntoView) tab.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
+          });
+        };
+
+        const openFullmenu = () => {
+          fullmenuLastFocus = document.activeElement;
+          fullmenu.classList.add('is-open');
+          fullmenu.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('modal-open');
+          if (fullmenuBody) fullmenuBody.scrollTop = 0;
+          activeTabId = null;
+          setActiveTab(fullmenuTabs[0]?.dataset.fullmenuTarget, false);
+          fullmenu.querySelector('[data-fullmenu-close]')?.focus();
+        };
+        const closeFullmenu = () => {
+          fullmenu.classList.remove('is-open');
+          fullmenu.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('modal-open');
+          if (fullmenuLastFocus instanceof HTMLElement) fullmenuLastFocus.focus();
+        };
+
+        document.querySelectorAll('[data-fullmenu-open]').forEach((t) => t.addEventListener('click', openFullmenu));
+        fullmenu.querySelectorAll('[data-fullmenu-close]').forEach((b) => b.addEventListener('click', closeFullmenu));
+        fullmenu.addEventListener('click', (e) => { if (e.target === fullmenu) closeFullmenu(); });
+
+        fullmenuTabs.forEach((tab) => tab.addEventListener('click', () => {
+          const section = document.getElementById(tab.dataset.fullmenuTarget);
+          if (!section || !fullmenuBody) return;
+          setActiveTab(tab.dataset.fullmenuTarget, false);
+          fullmenuBody.scrollTo({ top: section.offsetTop - 8, behavior: prefersReduced ? 'auto' : 'smooth' });
+        }));
+
+        let spyTimer = 0;
+        fullmenuBody?.addEventListener('scroll', () => {
+          if (spyTimer) return;
+          spyTimer = window.setTimeout(() => {
+            spyTimer = 0;
+            const atBottom = fullmenuBody.scrollTop + fullmenuBody.clientHeight >= fullmenuBody.scrollHeight - 60;
+            const marker = fullmenuBody.scrollTop + 90;
+            let current = spySections[0];
+            spySections.forEach((section) => { if (section.offsetTop <= marker) current = section; });
+            if (atBottom) current = spySections[spySections.length - 1];
+            setActiveTab(current?.id, true);
+          }, 120);
+        }, { passive: true });
+
+        document.addEventListener('keydown', (e) => {
+          if (!fullmenu.classList.contains('is-open')) return;
+          if (e.key === 'Escape') { closeFullmenu(); return; }
+          if (e.key === 'Tab') {
+            const focusable = [...fullmenu.querySelectorAll('button, a[href]')].filter((el) => !el.hasAttribute('disabled'));
+            if (!focusable.length) return;
+            const first = focusable[0], last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
+        });
+      }
     })();
   </script>
 </body>
