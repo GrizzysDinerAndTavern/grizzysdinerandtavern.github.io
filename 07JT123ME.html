@@ -1595,7 +1595,7 @@
       //        https://www.grizzysdinerandtavern.com/*
       //        https://grizzysdinerandtavern.github.io/*
       //   2. API restrictions: allow ONLY "Places API (New)".
-      const GOOGLE_PLACES_API_KEY = 'MAPS_PLACES_API';
+      const GOOGLE_PLACES_API_KEY = getenv('MAPS_PLACES_API');
       // Optional: after the first successful load the Place ID is printed to
       // the browser console — paste it here to skip the text-search lookup
       // (fewer/cheaper API calls).
