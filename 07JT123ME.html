@@ -522,6 +522,29 @@
     .reviews-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
     .reviews-note { margin-top: 18px; color: var(--gray-600); font-size: 0.78rem; }
 
+    /* Review prompt (slides in when the reviews section scrolls into view) */
+    .review-pop {
+      position: fixed; right: 14px; bottom: calc(84px + env(safe-area-inset-bottom)); z-index: 3300;
+      width: min(330px, calc(100vw - 28px)); padding: 20px 20px 18px;
+      color: var(--white); background: var(--navy-950); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px; box-shadow: 0 24px 60px rgba(4,16,31,0.45);
+      opacity: 0; transform: translateY(26px);
+      transition: opacity 420ms cubic-bezier(.2,.8,.2,1), transform 420ms cubic-bezier(.2,.8,.2,1);
+    }
+    .review-pop[hidden] { display: none; }
+    .review-pop.is-open { opacity: 1; transform: none; }
+    @media (min-width: 600px) { .review-pop { right: 20px; bottom: 20px; } }
+    .review-pop__close {
+      position: absolute; top: 10px; right: 10px; width: 34px; height: 34px; display: grid; place-items: center;
+      color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 10px; font-size: 0.85rem; cursor: pointer;
+    }
+    .review-pop__close:hover { color: var(--white); background: var(--red-600); border-color: var(--red-600); }
+    .review-pop__stars { color: #fbbc04; font-size: 1rem; letter-spacing: 3px; }
+    .review-pop strong { display: block; margin: 8px 0 4px; font-family: var(--display); font-weight: 400; font-size: 1.35rem; letter-spacing: 0.02em; line-height: 1.1; text-transform: uppercase; }
+    .review-pop p { margin: 0 0 14px; color: rgba(255,255,255,0.78); font-size: 0.86rem; line-height: 1.5; }
+    .review-pop .btn { width: 100%; }
+
     /* ============ Final CTA ============ */
     .final-cta { position: relative; overflow: hidden; text-align: center; }
     .final-cta__inner { position: relative; z-index: 1; max-width: 900px; margin-inline: auto; }
@@ -1031,7 +1054,7 @@
 
         <div class="reviews-actions reveal">
           <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Grizzy%27s%20Diner%20%26%20Tavern%20186%20Broadway%20St%20Berlin%20WI%2054923" target="_blank" rel="noopener">Read All Reviews on Google</a>
-          <a class="btn btn--outline" href="https://search.google.com/local/writereview?placeid=ChIJe0Fs8S9FAYgRDm03HADl0BI" target="_blank" rel="noopener">Write a Review</a>
+          <a class="btn btn--outline" href="https://search.google.com/local/writereview?placeid=ChIJe0Fs8S9FAYgRDm03HADl0BI" data-write-review target="_blank" rel="noopener">Write a Review</a>
         </div>
         <p class="reviews-note">Ratings and reviews are provided by Google.</p>
       </div>
@@ -1086,6 +1109,15 @@
     <a href="#" data-fullmenu-open><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>Menu</a>
     <a href="https://www.google.com/maps/dir/?api=1&amp;destination=186%20Broadway%20St%2C%20Berlin%2C%20WI%2054923" target="_blank" rel="noopener"><svg class="mobile-bottom-nav__icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12S3 17 3 10a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Directions</a>
   </nav>
+
+  <!-- Review prompt: slides in once per visit when the reviews section scrolls into view. -->
+  <div class="review-pop" id="review-pop" role="dialog" aria-label="Write a Google review" hidden>
+    <button class="review-pop__close" type="button" data-review-pop-close aria-label="Dismiss">✕</button>
+    <span class="review-pop__stars" aria-hidden="true">★★★★★</span>
+    <strong>Enjoyed Grizzy’s?</strong>
+    <p>Tell your neighbors — a quick Google review means the world to a small-town diner.</p>
+    <a class="btn btn--primary" href="https://search.google.com/local/writereview?placeid=ChIJe0Fs8S9FAYgRDm03HADl0BI" data-write-review target="_blank" rel="noopener">Write a Review</a>
+  </div>
 
   <div class="fullmenu" id="full-menu" role="dialog" aria-modal="true" aria-labelledby="fullmenu-title" aria-hidden="true">
     <div class="fullmenu__panel">
@@ -1632,6 +1664,67 @@
             else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
           }
         });
+      }
+
+      // ===== Write-a-review popup window + scroll-triggered prompt =====
+      // Google's review form can't be iframed, so "Write a Review" opens the
+      // official dialog in a small centered popup window (falls back to a new
+      // tab on mobile / when the popup is blocked).
+      const WRITE_REVIEW_URL = 'https://search.google.com/local/writereview?placeid=ChIJe0Fs8S9FAYgRDm03HADl0BI';
+      const openReviewWindow = () => {
+        const w = 520;
+        const h = 660;
+        const left = Math.max(0, Math.round((window.screen.width - w) / 2));
+        const top = Math.max(0, Math.round((window.screen.height - h) / 2));
+        const win = window.open(WRITE_REVIEW_URL, 'grizzys-write-review', `popup=yes,width=${w},height=${h},left=${left},top=${top}`);
+        if (!win) window.open(WRITE_REVIEW_URL, '_blank', 'noopener');
+      };
+
+      const reviewPop = document.getElementById('review-pop');
+      const hideReviewPop = () => {
+        if (!reviewPop || reviewPop.hidden) return;
+        reviewPop.classList.remove('is-open');
+        setTimeout(() => { reviewPop.hidden = true; }, 450);
+      };
+
+      document.querySelectorAll('[data-write-review]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          hideReviewPop();
+          openReviewWindow();
+        });
+      });
+
+      if (reviewPop) {
+        const POP_KEY = 'grizzys-review-pop-shown';
+        const popSeen = () => {
+          try { return sessionStorage.getItem(POP_KEY); } catch (err) { return null; }
+        };
+        const markPopSeen = () => {
+          try { sessionStorage.setItem(POP_KEY, '1'); } catch (err) {}
+        };
+        const showReviewPop = () => {
+          if (popSeen()) return;
+          markPopSeen();
+          reviewPop.hidden = false;
+          // Double rAF so the browser applies display before the transition class.
+          requestAnimationFrame(() => requestAnimationFrame(() => reviewPop.classList.add('is-open')));
+        };
+        const closeBtn = reviewPop.querySelector('[data-review-pop-close]');
+        if (closeBtn) closeBtn.addEventListener('click', hideReviewPop);
+
+        const reviewsSection = document.getElementById('reviews');
+        if (reviewsSection && 'IntersectionObserver' in window && !popSeen()) {
+          const popIo = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                showReviewPop();
+                popIo.disconnect();
+              }
+            });
+          }, { threshold: 0.3 });
+          popIo.observe(reviewsSection);
+        }
       }
 
       // ===== Google reviews (Places API (New)) =====
