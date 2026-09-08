@@ -490,9 +490,24 @@
     .stars svg { width: 18px; height: 18px; fill: #fbbc04; }
     .stars svg.off { fill: #dadce0; }
     .stars--lg svg { width: 22px; height: 22px; }
-    .review-grid { display: grid; gap: 18px; }
-    @media (min-width: 600px) { .review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (min-width: 980px) { .review-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    /* Reviews carousel: swipe/drag on touch, arrows on desktop, auto-advances. */
+    .review-carousel { position: relative; }
+    .review-grid { display: flex; gap: 18px; padding: 8px 0 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .review-grid::-webkit-scrollbar { display: none; }
+    .review-grid > .review-card { flex: 0 0 100%; scroll-snap-align: start; }
+    @media (min-width: 600px) { .review-grid > .review-card { flex-basis: calc((100% - 18px) / 2); } }
+    @media (min-width: 980px) { .review-grid > .review-card { flex-basis: calc((100% - 36px) / 3); } }
+    .review-carousel__btn {
+      position: absolute; top: 50%; z-index: 2; width: 46px; height: 46px; display: grid; place-items: center;
+      color: var(--navy-950); background: var(--white); border: 2px solid var(--navy-950); border-radius: 50%;
+      box-shadow: 0 10px 26px rgba(4,16,31,0.18); font-size: 1.5rem; line-height: 1; cursor: pointer;
+      transform: translateY(-50%); transition: background-color 160ms, border-color 160ms, color 160ms;
+    }
+    .review-carousel__btn:hover { color: var(--white); background: var(--red-600); border-color: var(--red-600); }
+    .review-carousel__btn[hidden] { display: none; }
+    .review-carousel__btn--prev { left: -8px; }
+    .review-carousel__btn--next { right: -8px; }
+    @media (min-width: 1240px) { .review-carousel__btn--prev { left: -23px; } .review-carousel__btn--next { right: -23px; } }
     .review-card {
       display: flex; flex-direction: column; gap: 12px; padding: 22px;
       background: var(--white); border: 1px solid #e0e3e7; border-radius: 22px;
@@ -1050,7 +1065,11 @@
           </div>
         </div>
 
-        <div class="review-grid" data-reviews-grid aria-live="polite"></div>
+        <div class="review-carousel">
+          <button class="review-carousel__btn review-carousel__btn--prev" type="button" data-reviews-prev aria-label="Previous reviews" hidden>‹</button>
+          <div class="review-grid" data-reviews-grid aria-live="polite"></div>
+          <button class="review-carousel__btn review-carousel__btn--next" type="button" data-reviews-next aria-label="Next reviews" hidden>›</button>
+        </div>
 
         <div class="reviews-actions reveal">
           <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Grizzy%27s%20Diner%20%26%20Tavern%20186%20Broadway%20St%20Berlin%20WI%2054923" target="_blank" rel="noopener">Read All Reviews on Google</a>
@@ -1696,16 +1715,12 @@
       });
 
       if (reviewPop) {
-        const POP_KEY = 'grizzys-review-pop-shown';
-        const popSeen = () => {
-          try { return sessionStorage.getItem(POP_KEY); } catch (err) { return null; }
-        };
-        const markPopSeen = () => {
-          try { sessionStorage.setItem(POP_KEY, '1'); } catch (err) {}
-        };
+        // Shows once per page load when the reviews section scrolls into view
+        // (so it comes back on refresh); the ✕ dismisses it for this view.
+        let popShown = false;
         const showReviewPop = () => {
-          if (popSeen()) return;
-          markPopSeen();
+          if (popShown) return;
+          popShown = true;
           reviewPop.hidden = false;
           // Double rAF so the browser applies display before the transition class.
           requestAnimationFrame(() => requestAnimationFrame(() => reviewPop.classList.add('is-open')));
@@ -1714,7 +1729,7 @@
         if (closeBtn) closeBtn.addEventListener('click', hideReviewPop);
 
         const reviewsSection = document.getElementById('reviews');
-        if (reviewsSection && 'IntersectionObserver' in window && !popSeen()) {
+        if (reviewsSection && 'IntersectionObserver' in window) {
           const popIo = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
@@ -1783,6 +1798,7 @@
           const card = el('article', 'review-card');
           card.appendChild(el('p', 'review-card__text', message));
           reviewsGrid.appendChild(card);
+          refreshCarousel();
         };
 
         const renderPlace = (place) => {
@@ -1846,6 +1862,8 @@
             if (text) card.appendChild(el('p', 'review-card__text', text));
             reviewsGrid.appendChild(card);
           });
+          reviewsGrid.scrollTo({ left: 0 });
+          refreshCarousel();
         };
 
         const readCache = () => {
@@ -1858,6 +1876,50 @@
         const writeCache = (place) => {
           try { localStorage.setItem(CACHE_KEY, JSON.stringify({ t: Date.now(), place })); } catch (err) {}
         };
+
+        // ---- Carousel: arrow buttons, looping, gentle auto-advance ----
+        const prevBtn = document.querySelector('[data-reviews-prev]');
+        const nextBtn = document.querySelector('[data-reviews-next]');
+        const cardStep = () => {
+          const card = reviewsGrid.querySelector('.review-card');
+          if (!card) return 0;
+          const gap = parseFloat(getComputedStyle(reviewsGrid).columnGap) || 18;
+          return card.getBoundingClientRect().width + gap;
+        };
+        const atEnd = () => reviewsGrid.scrollLeft + reviewsGrid.clientWidth >= reviewsGrid.scrollWidth - 4;
+        const slide = (dir) => {
+          if (dir > 0 && atEnd()) { reviewsGrid.scrollTo({ left: 0, behavior: 'smooth' }); return; }
+          if (dir < 0 && reviewsGrid.scrollLeft <= 4) { reviewsGrid.scrollTo({ left: reviewsGrid.scrollWidth, behavior: 'smooth' }); return; }
+          reviewsGrid.scrollBy({ left: dir * cardStep(), behavior: 'smooth' });
+        };
+        // Arrows only show when there are more cards than fit in view.
+        const refreshCarousel = () => {
+          const scrollable = reviewsGrid.scrollWidth > reviewsGrid.clientWidth + 4;
+          if (prevBtn) prevBtn.hidden = !scrollable;
+          if (nextBtn) nextBtn.hidden = !scrollable;
+        };
+        let autoTimer = null;
+        const stopAuto = () => { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } };
+        const startAuto = () => {
+          if (prefersReduced || autoTimer) return;
+          autoTimer = setInterval(() => {
+            if (document.hidden || !nextBtn || nextBtn.hidden) return;
+            slide(1);
+          }, 5500);
+        };
+        if (prevBtn) prevBtn.addEventListener('click', () => slide(-1));
+        if (nextBtn) nextBtn.addEventListener('click', () => slide(1));
+        window.addEventListener('resize', refreshCarousel);
+        const carouselWrap = reviewsGrid.closest('.review-carousel');
+        if (carouselWrap) {
+          // Pause the auto-advance while the visitor is reading or swiping.
+          carouselWrap.addEventListener('pointerenter', stopAuto);
+          carouselWrap.addEventListener('pointerleave', startAuto);
+          carouselWrap.addEventListener('focusin', stopAuto);
+          carouselWrap.addEventListener('focusout', startAuto);
+          carouselWrap.addEventListener('touchstart', stopAuto, { passive: true });
+        }
+        startAuto();
 
         const FIELDS = ['id', 'rating', 'userRatingCount', 'reviews'];
         const fetchPlace = async () => {
