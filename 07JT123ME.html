@@ -1031,7 +1031,7 @@
 
         <div class="reviews-actions reveal">
           <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&amp;query=Grizzy%27s%20Diner%20%26%20Tavern%20186%20Broadway%20St%20Berlin%20WI%2054923" target="_blank" rel="noopener">Read All Reviews on Google</a>
-          <a class="btn btn--outline" href="https://www.google.com/maps/search/?api=1&amp;query=Grizzy%27s%20Diner%20%26%20Tavern%20186%20Broadway%20St%20Berlin%20WI%2054923" target="_blank" rel="noopener">Write a Review</a>
+          <a class="btn btn--outline" href="https://search.google.com/local/writereview?placeid=ChIJe0Fs8S9FAYgRDm03HADl0BI" target="_blank" rel="noopener">Write a Review</a>
         </div>
         <p class="reviews-note">Ratings and reviews are provided by Google.</p>
       </div>
@@ -1701,7 +1701,9 @@
             countEl.textContent = `Based on ${place.userRatingCount || 0} Google reviews`;
             summaryEl.hidden = false;
           }
-          const reviews = Array.isArray(place.reviews) ? place.reviews : [];
+          // Only show 4- and 5-star reviews on the site.
+          const reviews = (Array.isArray(place.reviews) ? place.reviews : [])
+            .filter((review) => Number(review.rating) >= 4);
           if (!reviews.length) {
             showFallback('No reviews to show right now — read and leave reviews on Google below.');
             return;
